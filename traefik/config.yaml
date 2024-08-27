@@ -1,0 +1,5 @@
+# default start up settings so we don't have to proide command line args
+
+disable: servicelb # turn off serviceLB, (it sucks as it's basically NodePort but more complicated)
+write-kubeconfig-mode: 777 # So we can call kubectl on the cluster, might lock this down when we've learned more
+node-taint: CriticalAddonsOnly=true:NoExecute # Don't run pods on the control plane!!

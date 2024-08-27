@@ -1,0 +1,25 @@
+---
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+serversTransport:
+  insecureSkipVerify: true
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+  kubectrl:
+    address: ":6443"
+providers:
+  providersThrottleDuration: 42s
+  file:
+    watch: true
+    filename: foobar
+    debugLogGeneratedTemplate: true
+api:
+  insecure: true
+  dashboard: true
+  debug: true
+  disableDashboardAd: true
+...
