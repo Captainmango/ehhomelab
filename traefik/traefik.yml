@@ -2,8 +2,10 @@
 global:
   checkNewVersion: true
   sendAnonymousUsage: false
-serversTransport:
-  insecureSkipVerify: true
+tcpServersTransport:
+  dialKeepAlive: 0
+  tls:
+    insecureSkipVerify: true
 entryPoints:
   web:
     address: ":80"
@@ -12,10 +14,10 @@ entryPoints:
   kubectrl:
     address: ":6443"
 providers:
-  providersThrottleDuration: 42s
+  providersThrottleDuration: 30s
   file:
     watch: true
-    filename: foobar
+    filename: /etc/traefik/config.yml
     debugLogGeneratedTemplate: true
 api:
   insecure: true

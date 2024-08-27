@@ -1,7 +1,7 @@
 ---
 tcp:
   routers:
-    to-k3s-ctrl:
+    to-k3s-control-plane:
       entryPoints:
         - "kubectrl"
       rule: "HostSNI(`*`)"
