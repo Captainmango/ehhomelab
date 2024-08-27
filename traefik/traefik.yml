@@ -12,7 +12,7 @@ entryPoints:
   websecure:
     address: ":443"
   kubectrl:
-    address: ":6443/tcp"
+    address: ":6443"
     reusePort: true
 providers:
   providersThrottleDuration: 30s

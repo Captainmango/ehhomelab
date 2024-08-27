@@ -10,7 +10,7 @@ tcp:
     k3s-control-plane:
       loadBalancer:
         servers:
-        - address: "192.168.1.188:6443/tcp" # ctrl-1
-        - address: "192.168.1.201:6443/tcp" # ctrl-2
-        - address: "192.168.1.142:6443/tcp" # ctrl-3
+        - address: "192.168.1.188:6443" # ctrl-1
+        - address: "192.168.1.201:6443" # ctrl-2
+        - address: "192.168.1.142:6443" # ctrl-3
 ...
