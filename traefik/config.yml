@@ -3,9 +3,12 @@ tcp:
   routers:
     to-k3s-control-plane:
       entryPoints:
+        - "websecure"
         - "kubectrl"
       rule: "HostSNI(`*`)"
       service: "k3s-control-plane"
+      tls:
+        passthrough: true
   services:
     k3s-control-plane:
       loadBalancer:

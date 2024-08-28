@@ -3,7 +3,8 @@ global:
   checkNewVersion: true
   sendAnonymousUsage: false
 tcpServersTransport:
-  dialKeepAlive: 0
+  dialTimeout: 15
+  dialKeepAlive: -1
   tls:
     insecureSkipVerify: true
 entryPoints:
