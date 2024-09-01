@@ -16,4 +16,17 @@ tcp:
         - address: "192.168.1.188:6443" # ctrl-1
         - address: "192.168.1.201:6443" # ctrl-2
         - address: "192.168.1.142:6443" # ctrl-3
+
+http:
+  routers:
+    to-cluster-ingress:
+      entryPoints:
+        - "websecure"
+        - "web"
+      rule: "HostRegexp(`.`)"
+      service: cluster-ingress
+  services:
+    cluster-ingress:
+      loadBalancer:
+        - url: "http://192.168.1.123"
 ...
