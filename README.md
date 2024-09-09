@@ -35,7 +35,7 @@ server3     Ready    control-plane,etcd,master   10m   vX.Y.Z
 Join the workers to the cluster:
 
 ```
-curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - agent --server https://<ip or hostname of server>:6443
+curl -sfL https://get.k3s.io | K3S_TOKEN=[SECRET] sh -s - agent --server https://<ip or hostname of server>:6443
 ```
 
 N.B. there's no need to set a san here as the HA ETCD will push updates across the control plane.
