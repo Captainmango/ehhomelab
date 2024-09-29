@@ -37,7 +37,7 @@ certificatesResolvers:
   cloudflare:
     acme:
       email: edward.heaver01@gmail.com
-      storage: /etc/traefik/acme
+      storage: /etc/traefik/acme.json
       # caServer: https://acme-v02.api.letsencrypt.org/directory # prod (default)
       caServer: https://acme-staging-v02.api.letsencrypt.org/directory # staging
       dnsChallenge:
