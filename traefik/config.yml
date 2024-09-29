@@ -42,7 +42,7 @@ http:
       loadBalancer:
         - url: "https://192.168.1.159:8006"
       passHostHeader: true
-      
+
   middlewares:
     https-redirectscheme:
       redirectScheme:
@@ -71,6 +71,6 @@ http:
     secured:
       chain:
         middlewares:
-        - default-whitelist
-        - default-headers
+          - default-whitelist
+          - default-headers
 ...
