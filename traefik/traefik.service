@@ -31,7 +31,7 @@ ProtectSystem=full
 
 ; … except /etc/traefik/acme, because we want Letsencrypt-certificates there.
 ;   This merely retains r/w access rights, it does not add anything new. Must still be writable on the host!
-ReadWritePaths=/etc/traefik/acme
+ReadWritePaths=/etc/traefik/
 
 ; The following additional security directives only work with systemd v229 or later.
 ; Note that you may have to add capabilities required by any plugins in use.
@@ -43,6 +43,8 @@ NoNewPrivileges=true
 
 ; Set the unit to read env vars in. Needed to get the Let's Encrypt acme stuff to work with Cloudflare over their API
 EnvironmentFile=-/etc/traefik/env
+; Make sure the token is usable by child processes. Not sure if Let's Encrypt is spun up separatetly
+PassEnvironment=CF_DNS_API_TOKEN
 
 [Install]
 WantedBy=multi-user.target
