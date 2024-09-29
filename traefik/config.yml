@@ -23,7 +23,7 @@ http:
       entryPoints:
         - "websecure"
         - "web"
-      rule: "HostRegexp(`(?i)^.+\.internal\.eheaver\.cloud$`)"
+      rule: "HostRegexp(`(?i)^.+\\.internal\\.eheaver\\.cloud$`)"
       service: cluster-ingress
     proxmox:
       entryPoints:
@@ -32,7 +32,12 @@ http:
       middlewares:
         - default-headers
         - https-redirectscheme
-      tls: {}
+      tls: 
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
       service: proxmox
   services:
     cluster-ingress:
