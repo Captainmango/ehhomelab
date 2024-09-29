@@ -29,7 +29,7 @@ ProtectHome=true
 ; Make /usr, /boot, /etc and possibly some more folders read-only.
 ProtectSystem=full
 
-; … except /etc/ssl/traefik, because we want Letsencrypt-certificates there.
+; … except /etc/traefik/acme, because we want Letsencrypt-certificates there.
 ;   This merely retains r/w access rights, it does not add anything new. Must still be writable on the host!
 ReadWritePaths=/etc/traefik/acme
 
@@ -38,8 +38,11 @@ ReadWritePaths=/etc/traefik/acme
 CapabilityBoundingSet=CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_BIND_SERVICE
 
-; Don't let traefik try and gain any new privileges (doesn't let it or it's children escalate.)
+; Don't let traefik try and gain any new privileges (doesn't let it or its children escalate.)
 NoNewPrivileges=true
+
+; Set the unit to read env vars in. Needed to get the Let's Encrypt acme stuff to work with Cloudflare over their API
+EnvironmentFile=-/etc/traefik/env
 
 [Install]
 WantedBy=multi-user.target
