@@ -23,7 +23,7 @@ http:
       entryPoints:
         - "websecure"
         - "web"
-      rule: "HostRegexp(`.`)"
+      rule: "HostRegexp(`(?i)^.+\.internal\.eheaver\.cloud$`)"
       service: cluster-ingress
     proxmox:
       entryPoints:
