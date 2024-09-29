@@ -25,10 +25,24 @@ http:
         - "web"
       rule: "HostRegexp(`.`)"
       service: cluster-ingress
+    proxmox:
+      entrypoints:
+        - "websecure"
+      rule: "Host(`proxmox.eheaver.cloud`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: proxmox
   services:
     cluster-ingress:
       loadBalancer:
         - url: "http://192.168.1.123"
+    proxmox:
+      loadBalancer:
+        - url: "https://192.168.1.159:8006"
+      passHostHeader: true
+      
   middlewares:
     https-redirectscheme:
       redirectScheme:
