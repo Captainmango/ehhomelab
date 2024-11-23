@@ -27,6 +27,7 @@ http:
       service: cluster-ingress
     proxmox:
       entryPoints:
+        - "web"
         - "websecure"
       rule: "Host(`proxmox.eheaver.cloud`)"
       middlewares:
@@ -41,11 +42,11 @@ http:
       service: proxmox
     pihole:
       entryPoints:
+        - "web"
         - "websecure"
       rule: "Host(`pihole.eheaver.cloud`)"
       middlewares:
         - default-headers
-        - https-redirectscheme
       tls: 
         certResolver: cloudflare
         domains:
@@ -68,7 +69,7 @@ http:
     pihole:
       loadBalancer:
         servers:
-          - url: "https://192.168.1.94"
+          - url: "http://192.168.1.94"
         passHostHeader: true
 
   middlewares:
