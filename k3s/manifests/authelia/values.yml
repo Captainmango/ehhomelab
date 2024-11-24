@@ -216,7 +216,18 @@ ingress:
 
 pod:
   # Must be Deployment, DaemonSet, or StatefulSet.
-  kind: 'DaemonSet'
+  kind: StatefulSet
+  extraVolumeMounts:
+    - name: users-database
+      mountPath: "/config/users"
+      readOnly: true
+  extraVolumes:
+    - name: users-database
+      configMap:
+        name: authelia-users         
+        items:
+          - key: users-database.yml
+            path: users_database.yml
 
   annotations: {}
   # annotations:
@@ -351,9 +362,6 @@ pod:
       timeoutSeconds: 5
       successThreshold: 1
       failureThreshold: 6
-
-  extraVolumeMounts: []
-  extraVolumes: []
 
 ##
 ## Kubernetes Pod Disruption Budget
@@ -749,7 +757,7 @@ configMap:
     ##
     file:
       enabled: true
-      path: '/config/users_database.yml'
+      path: '/config/users/users_database.yml'
       watch: true
       search:
         email: false
