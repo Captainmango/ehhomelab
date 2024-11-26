@@ -5,6 +5,6 @@ metadata:
   namespace: test
 spec:
   ports:
-    - name: web
+    - name: web-secure
       port: 443
       targetPort: 8443
