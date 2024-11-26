@@ -8,6 +8,9 @@ spec:
     app: http-echo
   type: LoadBalancer
   ports:
-    - port: 80
+    - name: web
+      port: 80
       targetPort: 8080
-
+    - name: web-secure
+      port: 443
+      targetPort: 8443
