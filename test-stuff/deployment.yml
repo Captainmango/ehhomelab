@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: http-echo
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-echo
+  template:
+    metadata:
+      labels:
+        app: http-echo
+    spec:
+      containers:
+        - name: test-echo
+          image: mendhak/http-https-echo:35
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 500m
+          ports:
+            - containerPort: 8080
+              targetPort: 8080
+            - containerPort: 8443
+              targetPort: 8443
+      
