@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-echo
+  namespace: test
+spec:
+  template: {} # no need to patch
+  selector:
+    app: http-echo
+  replicas: 3
