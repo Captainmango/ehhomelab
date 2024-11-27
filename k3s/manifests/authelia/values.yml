@@ -231,12 +231,12 @@ pod:
         items:
           - key: users-database.yml
             path: users_database.yml
-    - name: smtp
+    - name: smtp-password
       secret:
-        name: smtp-password
+        secretName: smtp-password
         items:
-          - key: password.txt
-            path: password.txt
+          - path: password.txt
+            key: password.txt
 
   annotations: {}
   # annotations:
@@ -328,11 +328,11 @@ pod:
       #         topologyKey: 'topology.kubernetes.io/zone'
 
   env:
-    - name: AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
+    - name: AUTHELIA_NOTIFIER_SMTP_PASSWORD
       valueFrom:
         secretKeyRef:
-          - name: password.txt
-            key: password.txt
+          name: smtp-password
+          key: password.txt
 
   # env:
   # - name: 'TZ'
@@ -1300,7 +1300,7 @@ configMap:
     ## Important: Kubernetes (or HA) users must read https://www.authelia.com/overview/authorization/statelessness/
     ##
     filesystem:
-      enabled: true
+      enabled: false
       filename: '/config/notification.txt'
 
     ##
