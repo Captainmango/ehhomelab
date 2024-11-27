@@ -221,6 +221,9 @@ pod:
     - name: users-database
       mountPath: "/config/users"
       readOnly: true
+    - name: smtp-password
+      mountPath: "/config/smtp"
+      readOnly: true
   extraVolumes:
     - name: users-database
       configMap:
@@ -228,6 +231,12 @@ pod:
         items:
           - key: users-database.yml
             path: users_database.yml
+    - name: smtp
+      secret:
+        name: smtp-password
+        items:
+          - key: password.txt
+            path: password.txt
 
   annotations: {}
   # annotations:
@@ -318,7 +327,13 @@ pod:
       #             - S2
       #         topologyKey: 'topology.kubernetes.io/zone'
 
-  env: []
+  env:
+    - name: AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
+      valueFrom:
+        secretKeyRef:
+          - name: password.txt
+            key: password.txt
+
   # env:
   # - name: 'TZ'
   #   value: 'Australia/Melbourne'
@@ -1299,11 +1314,11 @@ configMap:
     ##   - validate the SMTP server x509 certificate during the TLS handshake against the hosts trusted certificates
     ##     (configure in tls section)
     smtp:
-      enabled: false
+      enabled: true
       enabledSecret: false
-      address: 'submission://smtp.mail.svc.cluster.local:587'
+      address: 'smtp.gmail.com:587'
       timeout: '5 seconds'
-      sender: 'Authelia <admin@example.com>'
+      sender: 'Authelia <admin@eheaver.cloud>'
 
       ## HELO/EHLO Identifier. Some SMTP Servers may reject the default of localhost.
       identifier: 'localhost'
@@ -1330,17 +1345,17 @@ configMap:
       ## more information.
       disable_starttls: false
 
-      username: 'test'
+      username: 'edward.heaver01@gmail.com'
       password:
         ## Disables this secret and leaves configuring it entirely up to you.
-        disabled: false
+        disabled: true
 
         ## The secret name. The ~ name is special as it is the secret we generate either automatically or via the
         ## secret_value option below.
         secret_name: ~
 
         ## The value of a generated secret when using the ~ secret_name.
-        value: ''
+        value: 'ffff'
 
         ## The path to the secret. If it has a '/' prefix it's assumed to be an absolute path within the pod. Otherwise
         ## it uses the format '{mountPath}/{secret_name}/{path}' where '{mountPath}' refers to the 'secret.mountPath'
@@ -1636,7 +1651,7 @@ secret:
   ## then those options will be rendered in the volumes spec. See 'example-without-items' for an example that doesn't
   ## specify this.
   ##
-  additionalSecrets: {}
+  additionalSecrets:
   # additionalSecrets:
   #   example:
   #     items:
