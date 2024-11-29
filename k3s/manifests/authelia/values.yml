@@ -1385,7 +1385,7 @@ configMap:
     oidc:
       ## Enables this in the config map. Currently in beta stage.
       ## See https://www.authelia.com/r/openid-connect/
-      enabled: false
+      enabled: true
 
       hmac_secret:
         ## Disables this secret and leaves configuring it entirely up to you.
@@ -1509,6 +1509,21 @@ configMap:
         allowed_origins_from_client_redirect_uris: false
 
       clients: []
+        # - client_id: 'proxmox'
+        #   client_name: 'Proxmox'
+        #   client_secret: $argon2id$v=19$m=65536,t=3,p=4$XBaQVDneRGBZI9zKN4op0w$9Uz8KHoFIPCuDCRHvydRwwq2uJ2w9QWWKNPbz73iDQM
+        #   public: false
+        #   authorization_policy: 'two_factor'
+        #   require_pkce: true
+        #   pkce_challenge_method: 'S256'
+        #   redirect_uris:
+        #     - 'https://proxmox.eheaver.cloud'
+        #   scopes:
+        #     - 'openid'
+        #     - 'profile'
+        #     - 'email'
+        #   userinfo_signed_response_alg: 'none'
+
 
       # clients:
         # -
