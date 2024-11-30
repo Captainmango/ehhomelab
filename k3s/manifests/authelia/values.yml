@@ -995,7 +995,6 @@ configMap:
     cookies:
       - domain: 'eheaver.cloud'
         authelia_url: 'https://auth.eheaver.cloud'
-        default_redirection_url: ''
         name: 'authelia_session'
         same_site: 'lax'
         inactivity: '5m'
@@ -1016,7 +1015,7 @@ configMap:
         # path: ''
 
         ## Default Redirection URL for this domain when there is no forwarding application.
-        # default_redirection_url: ''
+        # default_redirection_url: 'https://auth.eheaver.cloud'
 
         ## Cookie Name override for this individual cookie. Otherwise, uses the default value above where
         ## more descriptive information about this value exists.
