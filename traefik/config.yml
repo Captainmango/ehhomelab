@@ -54,6 +54,21 @@ http:
             sans:
               - "*.eheaver.cloud"
       service: pihole
+    authelia:
+      entryPoints:
+        - "web"
+        - "websecure"
+      rule: "Host(`auth.eheaver.cloud`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: 
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
+      service: authelia
   services:
     cluster-ingress:
       loadBalancer:
@@ -70,6 +85,12 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.1.94"
+        passHostHeader: true
+    
+    authelia:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.3"
         passHostHeader: true
 
   middlewares:
