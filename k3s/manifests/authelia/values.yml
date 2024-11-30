@@ -224,6 +224,9 @@ pod:
     - name: smtp-password
       mountPath: "/config/smtp"
       readOnly: true
+    - name: oidc
+      mountPath: "/secrets/oidc"
+      readOnly: true
   extraVolumes:
     - name: users-database
       configMap:
@@ -237,6 +240,13 @@ pod:
         items:
           - path: password.txt
             key: password.txt
+    - name: oidc
+      secret:
+        secretName: jwk-cert-secret
+        items:
+          - path: jwk.RS256.pem
+            key: jwk.RS256.pem
+
 
   annotations: {}
   # annotations:
@@ -1385,7 +1395,7 @@ configMap:
     oidc:
       ## Enables this in the config map. Currently in beta stage.
       ## See https://www.authelia.com/r/openid-connect/
-      enabled: false
+      enabled: true
 
       hmac_secret:
         ## Disables this secret and leaves configuring it entirely up to you.
@@ -1471,31 +1481,35 @@ configMap:
 
       ## The JWK's issuer option configures multiple JSON Web Keys. It's required that at least one of the JWK's
       ## configured has the RS256 algorithm. For RSA keys (RS or PS) the minimum is a 2048 bit key.
-      jwks: []
+      jwks:
+        - key_id: 'main-key'
+          algorithm: 'RS256'
+          use: 'sig'
+          key:
+            path: '/secrets/oidc/jwk.RS256.pem'
 
       # jwks:
-      #   - key_id: ''
-      #     algorithm: 'RS256'
-      #     use: 'sig'
-      #     key:
-      #       value: |
-      #         abc
-      #         123
-      #       path: '/secrets/oidc.jwk.RS256.pem'
-      #     certificate_chain:
-      #       path: '/secrets.oidc.jwk.RS256.crt'
+        # - key_id: ''
+        #   algorithm: 'RS256'
+        #   use: 'sig'
+        #   key:
+        #     value: |
+        #       abc
+        #       123
+        #     path: '/secrets/oidc.jwk.RS256.pem'
+        #   certificate_chain:
+        #     path: '/secrets.oidc.jwk.RS256.crt'
 
       ## Cross-Origin Resource Sharing (CORS) settings.
       cors:
         ## List of endpoints in addition to the metadata endpoints to permit cross-origin requests on.
-        # endpoints:
-        #    - 'authorization'
-        #    - 'pushed-authorization-request'
-        #    - 'token'
-        #    - 'revocation'
-        #    - 'introspection'
-        #    - 'userinfo'
-        endpoints: []
+        endpoints:
+           - 'authorization'
+           - 'pushed-authorization-request'
+           - 'token'
+           - 'revocation'
+           - 'introspection'
+           - 'userinfo'
 
         ## List of allowed origins.
         ## Any origin with https is permitted unless this option is configured or the
@@ -1508,21 +1522,21 @@ configMap:
         ## provided they have the scheme http or https and do not have the hostname of localhost.
         allowed_origins_from_client_redirect_uris: false
 
-      clients: []
-        # - client_id: 'proxmox'
-        #   client_name: 'Proxmox'
-        #   client_secret: $argon2id$v=19$m=65536,t=3,p=4$XBaQVDneRGBZI9zKN4op0w$9Uz8KHoFIPCuDCRHvydRwwq2uJ2w9QWWKNPbz73iDQM
-        #   public: false
-        #   authorization_policy: 'two_factor'
-        #   require_pkce: true
-        #   pkce_challenge_method: 'S256'
-        #   redirect_uris:
-        #     - 'https://proxmox.eheaver.cloud'
-        #   scopes:
-        #     - 'openid'
-        #     - 'profile'
-        #     - 'email'
-        #   userinfo_signed_response_alg: 'none'
+      clients:
+        - client_id: 'proxmox'
+          client_name: 'Proxmox'
+          client_secret: $argon2id$v=19$m=65536,t=3,p=4$XBaQVDneRGBZI9zKN4op0w$9Uz8KHoFIPCuDCRHvydRwwq2uJ2w9QWWKNPbz73iDQM
+          public: false
+          authorization_policy: 'one_factor'
+          require_pkce: true
+          pkce_challenge_method: 'S256'
+          redirect_uris:
+            - 'https://proxmox.eheaver.cloud'
+          scopes:
+            - 'openid'
+            - 'profile'
+            - 'email'
+          userinfo_signed_response_alg: 'none'
 
 
       # clients:
