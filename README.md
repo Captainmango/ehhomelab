@@ -10,7 +10,8 @@ To get started, first launch a server node with the cluster-init flag to enable 
 ```
 curl -sfL https://get.k3s.io | sh -s - server \
     --cluster-init \
-    --tls-san=<FIXED_IP> # Optional, needed if using a fixed registration address
+    --tls-san=<FIXED_IP> \ # Optional, needed if using a fixed registration address
+    --disable servicelb # Optional, remove things we don't want i.e. serviceLB and maybe traefik
 ```
 
 After launching the first server, join the second and third servers to the cluster using the shared secret:
@@ -19,7 +20,8 @@ After launching the first server, join the second and third servers to the clust
 ```
 curl -sfL https://get.k3s.io | K3S_TOKEN=[SECRET] sh -s - server \
     --server https://<ip or hostname of server1>:6443 \
-    --tls-san=<FIXED_IP> # Optional, needed if using a fixed registration address
+    --tls-san=<FIXED_IP> \ # Optional, needed if using a fixed registration address
+    --disable servicelb # Optional, remove things we don't want i.e. serviceLB and maybe traefik
 ```
 
 Check to see that the second and third servers are now part of the cluster:
@@ -39,3 +41,4 @@ curl -sfL https://get.k3s.io | K3S_TOKEN=[SECRET] sh -s - agent --server https:/
 ```
 
 N.B. there's no need to set a san here as the HA ETCD will push updates across the control plane.
+N.B. Can also use the single registration point if that's set up on the edge load balancer. Not required though
