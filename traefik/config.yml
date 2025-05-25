@@ -23,8 +23,10 @@ http:
       entryPoints:
         - "websecure"
         - "web"
-      rule: "HostRegexp(`(?i)^.+\\.internal\\.eheaver\\.cloud$`)"
+      rule: "HostRegexp(`(?i)^.+\\.eheaver\\.cloud$`)"
       service: cluster-ingress
+      priority: 1
+
     proxmox:
       entryPoints:
         - "web"
@@ -40,6 +42,8 @@ http:
             sans:
               - "*.eheaver.cloud"
       service: proxmox
+      priority: 10
+
     pihole:
       entryPoints:
         - "web"
@@ -54,6 +58,8 @@ http:
             sans:
               - "*.eheaver.cloud"
       service: pihole
+      priority: 10
+
     authelia:
       entryPoints:
         - "web"
@@ -69,6 +75,25 @@ http:
             sans:
               - "*.eheaver.cloud"
       service: authelia
+      priority: 10
+
+    portainer:
+      entryPoints:
+        - "web"
+        - "websecure"
+      rule: "Host(`portainer.eheaver.cloud`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: 
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
+      service: portainer
+      priority: 10
+
   services:
     cluster-ingress:
       loadBalancer:
@@ -90,7 +115,13 @@ http:
     authelia:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.3"
+          - url: "http://192.168.1.2"
+        passHostHeader: true
+
+    portainer:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.3:9000"
         passHostHeader: true
 
   middlewares:
