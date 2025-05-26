@@ -1,0 +1,59 @@
+# Disable components not separated in K3s
+kubeControllerManager:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
+kubeProxy:
+  enabled: false
+
+coreDns:
+  enabled: true
+
+# Kubelet metrics (K3s uses HTTP)
+kubelet:
+  serviceMonitor:
+    https: false
+
+# Node Exporter config
+nodeExporter:
+  hostRootFsMount: true
+
+# Prometheus main config
+prometheus:
+  service:
+    type: LoadBalancer
+    port: 9090
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    retention: "10d"
+    scrapeInterval: "30s"
+
+# Alertmanager with explicit port
+alertmanager:
+  enabled: true
+  service:
+    type: LoadBalancer
+    port: 9093
+
+# Grafana settings
+grafana:
+  service:
+    type: LoadBalancer
+  adminPassword: "admin"  # Change this in production!
+  sidecar:
+    dashboards:
+      enabled: true
+    datasources:
+      enabled: true
+
+# (Optional) Global resource limits
+resources:
+  limits:
+    cpu: 300m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
