@@ -1,3 +1,4 @@
 loki:
+  enabled: false
   image:
     tag: '2.9.3'
