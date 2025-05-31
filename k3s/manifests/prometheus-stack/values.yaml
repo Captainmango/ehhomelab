@@ -48,6 +48,10 @@ grafana:
       enabled: true
     datasources:
       enabled: true
+  grafana.ini:
+    server:
+      domain: "https://grafana.eheaver.cloud"
+      root_url: "https://grafana.eheaver.cloud"
 
 # (Optional) Global resource limits
 resources:

@@ -512,11 +512,11 @@ configMap:
 
       ## A list of automatically configured authz implementations if you don't wish to manually configure each one.
       ## Important Note: If you configure the 'authz' section this is completely ignored.
-      automatic_authz_implementations: []
+      automatic_authz_implementations:
       # automatic_authz_implementations:
       # - 'AuthRequest'
       # - 'ExtAuthz'
-      # - 'ForwardAuth'
+      - 'ForwardAuth'
 
       authz: {}
       # authz:
@@ -1549,7 +1549,27 @@ configMap:
             - 'openid'
             - 'profile'
             - 'email'
+            - 'groups'
           userinfo_signed_response_alg: 'none'
+          token_endpoint_auth_method: 'client_secret_post'
+
+        - client_id: 'grafana'
+          client_name: 'Grafana'
+          client_secret: $argon2id$v=19$m=65536,t=3,p=4$XBaQVDneRGBZI9zKN4op0w$9Uz8KHoFIPCuDCRHvydRwwq2uJ2w9QWWKNPbz73iDQM
+          public: false
+          authorization_policy: 'one_factor'
+          require_pkce: true
+          pkce_challenge_method: 'S256'
+          redirect_uris:
+            - 'https://grafana.eheaver.cloud/login/generic_oauth'
+            - 'https://grafana.eheaver.cloud'
+          scopes:
+            - 'openid'
+            - 'profile'
+            - 'groups'
+            - 'email'
+          userinfo_signed_response_alg: 'none'
+          token_endpoint_auth_method: 'client_secret_basic'
 
 
       # clients:
