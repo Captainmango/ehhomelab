@@ -13,6 +13,8 @@ serversTransport:
 entryPoints:
   web:
     address: ":80"
+    forwardedHeaders:
+      insecure: true
     http:
       redirections:
         entryPoint:
@@ -20,6 +22,8 @@ entryPoints:
           scheme: "https"
   websecure:
     address: ":443"
+    forwardedHeaders:
+      insecure: true
   kubectrl:
     address: ":6443"
     reusePort: true
