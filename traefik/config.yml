@@ -154,6 +154,23 @@ http:
               - "*.eheaver.cloud"
       service: grafana
       priority: 10
+    
+    woodpecker:
+      entryPoints:
+        - "web"
+        - "websecure"
+      rule: "Host(`woodpecker.eheaver.cloud`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: 
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
+      service: woodpecker
+      priority: 10
 
 
   services:
@@ -202,6 +219,12 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.1.7"
+        passHostHeader: true
+
+    woodpecker:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.1.8"
         passHostHeader: true
 
   middlewares:

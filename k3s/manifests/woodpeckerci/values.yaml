@@ -192,6 +192,7 @@ server:
     WOODPECKER_GITHUB: "true"
     WOODPECKER_GITHUB_CLIENT_FILE: /secrets/gh/client_id.txt
     WOODPECKER_GITHUB_SECRET_FILE: /secrets/gh/client_secret.txt
+    WOODPECKER_OPEN: "true"
 
   # -- Add extra environment variables from the secrets list
   extraSecretNamesForEnvFrom: []
