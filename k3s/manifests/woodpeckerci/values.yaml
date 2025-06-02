@@ -29,9 +29,9 @@ agent:
     WOODPECKER_SERVER: 'woodpecker-server:9000'
     WOODPECKER_BACKEND: kubernetes
     WOODPECKER_BACKEND_K8S_NAMESPACE: woodpecker
-    WOODPECKER_BACKEND_K8S_STORAGE_CLASS: ''
+    WOODPECKER_BACKEND_K8S_STORAGE_CLASS: 'local-path'
     WOODPECKER_BACKEND_K8S_VOLUME_SIZE: 10G
-    WOODPECKER_BACKEND_K8S_STORAGE_RWX: true
+    WOODPECKER_BACKEND_K8S_STORAGE_RWX: false
     WOODPECKER_BACKEND_K8S_POD_LABELS: ''
     WOODPECKER_BACKEND_K8S_POD_ANNOTATIONS: ''
     WOODPECKER_CONNECT_RETRY_COUNT: '1'
@@ -49,7 +49,7 @@ agent:
     # -- Defines the path where the volume should be mounted
     mountPath: '/etc/woodpecker'
     # -- Defines the storageClass of the persistent volume
-    storageClass: ''
+    storageClass: 'local-path'
     # -- Defines the access mode of the persistent volume
     accessModes:
       - ReadWriteOnce
@@ -241,7 +241,7 @@ server:
     # -- Defines the path where the volume should be mounted
     mountPath: '/var/lib/woodpecker'
     # -- Defines the storageClass of the persistent volume
-    storageClass: ''
+    storageClass: 'local-path'
 
   # -- The image pull secrets
   imagePullSecrets: []
