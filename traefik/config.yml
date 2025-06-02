@@ -161,6 +161,26 @@ http:
         - "websecure"
       rule: "Host(`woodpecker.eheaver.cloud`)"
       middlewares:
+        - internal-service-ratelimit
+        - default-headers
+        - https-redirectscheme
+        - authelia
+      tls: 
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
+      service: woodpecker
+      priority: 10
+
+    woodpecker-webhook:
+      entryPoints:
+        - "web"
+        - "websecure"
+      rule: "Host(`woodpecker.eheaver.cloud`) && Path(`/api/hook`)"
+      middlewares:
+        - webhook-ratelimit
         - default-headers
         - https-redirectscheme
       tls: 
@@ -170,7 +190,7 @@ http:
             sans:
               - "*.eheaver.cloud"
       service: woodpecker
-      priority: 10
+      priority: 15
 
 
   services:
@@ -269,4 +289,16 @@ http:
           - "Remote-Groups"
           - "Remote-Name"
           - "Remote-Email"
+    
+    webhook-ratelimit:
+      rateLimit:
+        average: 20
+        period: 5s
+        burst: 40
+
+    internal-service-ratelimit:
+      rateLimit:
+        average: 5
+        period: 1s
+        burst: 15
 ...
