@@ -197,7 +197,8 @@ http:
     cluster-ingress:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.1"
+          - url: "https://192.168.1.1"
+        passHostHeader: true
 
     proxmox:
       loadBalancer:

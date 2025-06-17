@@ -15,3 +15,5 @@ spec:
       services:
         - kind: Service
           name: mcp-fetch-proxy
+          namespace: toolhive-system
+          port: 8080
