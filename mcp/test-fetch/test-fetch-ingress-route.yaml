@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mcp-fetch
+  namespace: toolhive-system
+
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`fetch.internal.eheaver.cloud`)
+      priority: 10
+      services:
+        - kind: Service
+          name: mcp-fetch-proxy
