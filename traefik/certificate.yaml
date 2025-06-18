@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: internal-traefik-certificate
+  namespace: kube-system
+spec:
+  commonName: "*.eheaver.cloud"
+  secretName: internal-traefik-certificate-secret
+  issuerRef:
+    name: internal-cloudflare-cluster-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - "eheaver.cloud"
+    - "*.eheaver.cloud"

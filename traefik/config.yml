@@ -19,22 +19,6 @@ tcp:
 
 http:
   routers:
-    to-cluster-ingress:
-      entryPoints:
-        - "websecure"
-        - "web"
-      rule: "HostRegexp(`(?i)^.+\\.eheaver\\.cloud$`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: 
-        certResolver: cloudflare
-        domains:
-          - main: "eheaver.cloud"
-            sans:
-              - "*.eheaver.cloud"
-      service: cluster-ingress
-      priority: 1
 
     proxmox:
       entryPoints:
@@ -194,11 +178,6 @@ http:
 
 
   services:
-    cluster-ingress:
-      loadBalancer:
-        servers:
-          - url: "https://192.168.1.1"
-        passHostHeader: true
 
     proxmox:
       loadBalancer:
