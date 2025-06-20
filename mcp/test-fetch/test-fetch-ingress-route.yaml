@@ -6,7 +6,6 @@ metadata:
 
 spec:
   entryPoints:
-    - web
     - websecure
   routes:
     - kind: Rule
@@ -17,3 +16,9 @@ spec:
           name: mcp-fetch-proxy
           namespace: toolhive-system
           port: 8080
+  tls:
+    domains:
+      - main: eheaver.cloud
+        sans:
+          - "*.internal.eheaver.cloud"
+    secretName: mcp-fetch-certificate-secret

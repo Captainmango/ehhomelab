@@ -15,5 +15,6 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
-  tls: {}
+  tls: 
+    secretName: internal-cloudflare-cluster-issuer
           
