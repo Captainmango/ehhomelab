@@ -16,5 +16,5 @@ spec:
         - name: api@internal
           kind: TraefikService
   tls: 
-    secretName: internal-cloudflare-cluster-issuer
+    secretName: default-ingress-cert
           

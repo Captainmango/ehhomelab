@@ -17,8 +17,6 @@ spec:
           namespace: toolhive-system
           port: 8080
   tls:
-    domains:
-      - main: eheaver.cloud
-        sans:
-          - "*.internal.eheaver.cloud"
-    secretName: mcp-fetch-certificate-secret
+    store:
+      name: defaults
+      namespace: kube-system

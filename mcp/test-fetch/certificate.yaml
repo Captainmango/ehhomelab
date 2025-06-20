@@ -5,7 +5,7 @@ metadata:
   namespace: toolhive-system
 spec:
   commonName: "eheaver.cloud"
-  secretName: mcp-fetch-certificate-secret
+  secretName: default-ingress-cert
   issuerRef:
     name: internal-cloudflare-cluster-issuer
     kind: ClusterIssuer
