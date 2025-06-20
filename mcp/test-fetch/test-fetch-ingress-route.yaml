@@ -16,7 +16,8 @@ spec:
           name: mcp-fetch-proxy
           namespace: toolhive-system
           port: 8080
+      middlewares:
+        - name: redirect-https
+          namespace: kube-system
   tls:
-    store:
-      name: defaults
-      namespace: kube-system
+    secretName: mcp-fetch-certificate-secret
