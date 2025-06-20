@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   commonName: "eheaver.cloud"
-  secretName: default-ingress-cert # needs this exact name on k3s
+  secretName: default-ingress-cert
   issuerRef:
     name: internal-cloudflare-cluster-issuer
     kind: ClusterIssuer
