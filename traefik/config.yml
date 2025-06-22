@@ -9,6 +9,7 @@ tcp:
       service: "k3s-control-plane"
       tls:
         passthrough: true
+
   services:
     k3s-control-plane:
       loadBalancer:
