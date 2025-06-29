@@ -93,7 +93,7 @@ spec:
             name: kubernetes-provider
           forProvider:
             manifest:
-              apiVersion: traefik.io/v1alpha2
+              apiVersion: traefik.io/v1alpha1
               kind: IngressRoute
               metadata:
                 name: mcpingressroute
