@@ -1,0 +1,14 @@
+apiVersion: eheaver.cloud/v1alpha1
+kind: EHMCPServer
+metadata:
+  name: my-new-mcp
+  namespace: toolhive-system
+spec:
+  name: my-test-mcp
+  image: docker.io/mcp/fetch
+  mcpSettings:
+    transport: sse
+    port: 8080
+  ingressSettings:
+    port: 8080
+    domain: "test-mcp.internal.eheaver.cloud"

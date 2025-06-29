@@ -1,0 +1,103 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: ehmcpserver-composition
+  labels:
+    provider: kubernetes
+spec:
+  compositeTypeRef:
+    apiVersion: eheaver.cloud/v1alpha1
+    kind: EHMCPServer
+  resources:
+    - name: mcp-deployment
+      base:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: mcpserver
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: mcpserver
+          template:
+            metadata:
+              labels:
+                app: mcpserver
+            spec:
+              containers:
+                - name: mcpserver
+                  image: mcpserver
+                  ports:
+                    - containerPort: 80
+      patches:
+        - fromFieldPath: spec.image
+          toFieldPath: spec.template.spec.containers[0].image
+        - fromFieldPath: spec.name
+          toFieldPath: spec.metadata.name
+        - fromFieldPath: spec.name
+          toFieldPath: spec.selector.matchLabels.app
+        - fromFieldPath: spec.name
+          toFieldPath: spec.template.metadata.labels.app        
+        - fromFieldPath: spec.name
+          toFieldPath: spec.template.spec.containers[0].name
+        - fromFieldPath: spec.mcpSettings.port
+          toFieldPath: spec.template.spec.containers[0].ports[0].containerPort      
+
+
+    - name: mcp-service
+      base:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: mcpservice
+        spec:
+          selector:
+            app: mcpservice
+          ports:
+            - name: http
+              port: 80
+              targetPort: 80
+              protocol: TCP
+          type: ClusterIP
+      patches:
+        - fromFieldPath: spec.mcpSettings.port
+          toFieldPath: spec.ports[0].targetPort
+        - fromFieldPath: spec.ingressSettings.port
+          toFieldPath: spec.ports[0].port
+         
+
+    - name: mcp-ingressroute
+      base:
+        apiVersion: traefik.io/v1alpha1
+        kind: IngressRoute
+        metadata:
+          name: mcpingressroute
+        spec:
+          entryPoints:
+            - websecure
+          routes:
+            - match: Host(`example.com`)
+              kind: Rule
+              services:
+                - name: mcpservice
+                  kind: Service
+                  port: 80
+          middlewares:
+            - name: redirect-https
+              namespace: kube-system
+      patches:
+        - fromFieldPath: spec.ingressSettings.domain
+          toFieldPath: spec.routes[0].match
+          transforms:
+            - type: string
+              string:
+                fmt: "Host(`%s`)"
+        - fromFieldPath: spec.name
+          toFieldPath: spec.metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-ingressRoute"
+        - fromFieldPath: spec.ingressSettings.port
+          toFieldPath: spec.routes[0].port
