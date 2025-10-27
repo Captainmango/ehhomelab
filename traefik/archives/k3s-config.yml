@@ -1,23 +1,22 @@
 ---
 tcp:
-  # Off for now. Will turn on when we do k0s
-  # routers:
-  #   to-k3s-control-plane:
-  #     entryPoints:
-  #       - "websecure"
-  #       - "kubectrl"
-  #     rule: "HostSNI(`*`)"
-  #     service: "k3s-control-plane"
-  #     tls:
-  #       passthrough: true
+  routers:
+    to-k3s-control-plane:
+      entryPoints:
+        - "websecure"
+        - "kubectrl"
+      rule: "HostSNI(`*`)"
+      service: "k3s-control-plane"
+      tls:
+        passthrough: true
 
-  # services:
-  #   k3s-control-plane:
-  #     loadBalancer:
-  #       servers:
-  #       - address: "192.168.1.188:6443" # ctrl-1
-  #       - address: "192.168.1.201:6443" # ctrl-2
-  #       - address: "192.168.1.119:6443" # ctrl-3
+  services:
+    k3s-control-plane:
+      loadBalancer:
+        servers:
+        - address: "192.168.1.188:6443" # ctrl-1
+        - address: "192.168.1.201:6443" # ctrl-2
+        - address: "192.168.1.119:6443" # ctrl-3
 
 http:
   routers:
@@ -55,23 +54,6 @@ http:
       service: pihole
       priority: 10
 
-    pfsense:
-      entryPoints:
-        - "web"
-        - "websecure"
-      rule: "Host(`pfsense.eheaver.cloud`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: 
-        certResolver: cloudflare
-        domains:
-          - main: "eheaver.cloud"
-            sans:
-              - "*.eheaver.cloud"
-      service: pfsense
-      priority: 10
-
     authelia:
       entryPoints:
         - "web"
@@ -87,6 +69,23 @@ http:
             sans:
               - "*.eheaver.cloud"
       service: authelia
+      priority: 10
+
+    portainer:
+      entryPoints:
+        - "web"
+        - "websecure"
+      rule: "Host(`portainer.eheaver.cloud`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: 
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
+      service: portainer
       priority: 10
 
     prometheus:
@@ -178,6 +177,7 @@ http:
       service: woodpecker
       priority: 15
 
+
   services:
 
     proxmox:
@@ -190,12 +190,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.1.94"
-        passHostHeader: true
-    
-    pfsense:
-      loadBalancer:
-        servers:
-          - url: "http://192.186.2.237" # LAN interface
         passHostHeader: true
     
     authelia:
