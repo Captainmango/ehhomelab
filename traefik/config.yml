@@ -1,24 +1,33 @@
 ---
 tcp:
-  # Off for now. Will turn on when we do k0s
-  # routers:
-  #   to-k3s-control-plane:
-  #     entryPoints:
-  #       - "websecure"
-  #       - "kubectrl"
-  #     rule: "HostSNI(`*`)"
-  #     service: "k3s-control-plane"
-  #     tls:
-  #       passthrough: true
+  routers:
+    k0s-control-plane:
+      entryPoints:
+        - "websecure"
+        - "kubectrl"
+      rule: "HostSNI(`*`)"
+      service: "k0s-control-plane"
+      tls:
+        passthrough: true
 
-  # services:
-  #   k3s-control-plane:
-  #     loadBalancer:
-  #       servers:
-  #       - address: "192.168.1.188:6443" # ctrl-1
-  #       - address: "192.168.1.201:6443" # ctrl-2
-  #       - address: "192.168.1.119:6443" # ctrl-3
+    k0s-api:
+      entryPoints:
+        - "websecure"
+        - "k0s-api"
+      rule: "HostSNI(`*`)"
+      service: "k0s-api"
+      tls:
+        passthrough: true
 
+  services:
+    k0s-control-plane:
+      loadBalancer:
+        servers:
+        - address: "192.168.100.11:6443" # ctrl-1
+    k0s-api:
+      loadBalancer:
+        servers:
+        - address: "192.168.100.11:9443" # ctrl-1
 http:
   routers:
 

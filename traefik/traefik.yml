@@ -26,7 +26,8 @@ entryPoints:
       insecure: true
   kubectrl:
     address: ":6443"
-    reusePort: true
+  k0s-api:
+    address: ":9443"
 providers:
   providersThrottleDuration: 30s
   file:
