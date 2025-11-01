@@ -28,6 +28,15 @@ tcp:
       tls:
         passthrough: true
 
+    etcd:
+      entryPoints:
+        - "websecure"
+        - "etcd"
+      rule: "HostSNI(`*`)"
+      service: "etcd"
+      tls:
+        passthrough: true
+
   services:
     k0s-control-plane:
       loadBalancer:
@@ -42,6 +51,11 @@ tcp:
       loadBalancer:
         servers:
         - address: "192.168.100.11:8132" # ctrl-1
+
+    etcd:
+      loadBalancer:
+        servers:
+        - address: "192.168.100.11:2380" # ctrl-1
 http:
   routers:
 

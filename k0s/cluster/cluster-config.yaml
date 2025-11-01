@@ -14,4 +14,3 @@ spec:
       - 127.0.1.1
   telemetry:
     enabled: false
-  

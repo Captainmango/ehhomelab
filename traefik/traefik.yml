@@ -30,6 +30,8 @@ entryPoints:
     address: ":9443"
   konnectivity:
     address: ":8132"
+  etcd:
+    address: ":2380"
 providers:
   providersThrottleDuration: 30s
   file:
