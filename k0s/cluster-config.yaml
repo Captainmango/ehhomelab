@@ -5,7 +5,7 @@ metadata:
 spec:
   api:
     address: 192.168.100.11
-    externalAddress: 192.168.100.1 
+    externalAddress: 192.168.1.162 
     sans:
       - 192.168.1.162
       - 192.168.100.11
