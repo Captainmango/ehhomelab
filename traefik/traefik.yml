@@ -28,6 +28,8 @@ entryPoints:
     address: ":6443"
   k0s-api:
     address: ":9443"
+  konnectivity:
+    address: ":8132"
 providers:
   providersThrottleDuration: 30s
   file:

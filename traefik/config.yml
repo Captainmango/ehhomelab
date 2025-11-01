@@ -19,6 +19,15 @@ tcp:
       tls:
         passthrough: true
 
+    konnectivity:
+      entryPoints:
+        - "websecure"
+        - "konnectivity"
+      rule: "HostSNI(`*`)"
+      service: "konnectivity"
+      tls:
+        passthrough: true
+
   services:
     k0s-control-plane:
       loadBalancer:
@@ -28,6 +37,11 @@ tcp:
       loadBalancer:
         servers:
         - address: "192.168.100.11:9443" # ctrl-1
+
+    konnectivity:
+      loadBalancer:
+        servers:
+        - address: "192.168.100.11:8132" # ctrl-1
 http:
   routers:
 
