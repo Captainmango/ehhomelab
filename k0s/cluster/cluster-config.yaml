@@ -21,6 +21,6 @@ spec:
       - name: traefik
         chartname: traefik/traefik
         version: "37.2.0"
-        namespace: default
+        namespace: kube-system
   telemetry:
     enabled: false
