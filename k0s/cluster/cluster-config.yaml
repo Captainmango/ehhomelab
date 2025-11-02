@@ -12,5 +12,15 @@ spec:
       - 192.168.100.1
       - 127.0.0.1
       - 127.0.1.1
+  extensions:
+    helm:
+      repositories:
+      - name: traefik
+        url: https://traefik.github.io/charts
+      charts:
+      - name: traefik
+        chartname: traefik/traefik
+        version: "37.2.0"
+        namespace: default
   telemetry:
     enabled: false
