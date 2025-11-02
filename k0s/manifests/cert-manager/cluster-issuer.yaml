@@ -6,8 +6,8 @@ metadata:
 spec:
   acme:
     email: edward.heaver01@gmail.com
-    server: https://acme-v02.api.letsencrypt.org/directory # prod (default)
-    # server: https://acme-staging-v02.api.letsencrypt.org/directory # staging
+    # server: https://acme-v02.api.letsencrypt.org/directory # prod (default)
+    server: https://acme-staging-v02.api.letsencrypt.org/directory # staging
     privateKeySecretRef:
       name: internal-cloudflare-cluster-issuer-account-key
     solvers:
