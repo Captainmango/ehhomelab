@@ -126,29 +126,10 @@ http:
       service: authelia
       priority: 10
 
-    prometheus:
+    traefik-ingress:
       entryPoints:
         - "web"
         - "websecure"
-      rule: "Host(`prometheus.eheaver.cloud`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-        - authelia
-      tls: 
-        certResolver: cloudflare
-        domains:
-          - main: "eheaver.cloud"
-            sans:
-              - "*.eheaver.cloud"
-      service: prometheus
-      priority: 10
-
-    alert-manager:
-      entryPoints:
-        - "web"
-        - "websecure"
-      rule: "Host(`alert-manager.eheaver.cloud`)"
       middlewares:
         - default-headers
         - https-redirectscheme
@@ -158,62 +139,8 @@ http:
           - main: "eheaver.cloud"
             sans:
               - "*.eheaver.cloud"
-      service: alert-manager
-      priority: 10
-  
-    grafana:
-      entryPoints:
-        - "web"
-        - "websecure"
-      rule: "Host(`grafana.eheaver.cloud`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: 
-        certResolver: cloudflare
-        domains:
-          - main: "eheaver.cloud"
-            sans:
-              - "*.eheaver.cloud"
-      service: grafana
-      priority: 10
-    
-    woodpecker:
-      entryPoints:
-        - "web"
-        - "websecure"
-      rule: "Host(`woodpecker.eheaver.cloud`)"
-      middlewares:
-        - internal-service-ratelimit
-        - default-headers
-        - https-redirectscheme
-        - authelia
-      tls: 
-        certResolver: cloudflare
-        domains:
-          - main: "eheaver.cloud"
-            sans:
-              - "*.eheaver.cloud"
-      service: woodpecker
-      priority: 10
-
-    woodpecker-webhook:
-      entryPoints:
-        - "web"
-        - "websecure"
-      rule: "Host(`woodpecker.eheaver.cloud`) && Path(`/api/hook`)"
-      middlewares:
-        - webhook-ratelimit
-        - default-headers
-        - https-redirectscheme
-      tls: 
-        certResolver: cloudflare
-        domains:
-          - main: "eheaver.cloud"
-            sans:
-              - "*.eheaver.cloud"
-      service: woodpecker
-      priority: 15
+      rule: "Host(`traefik.internal.eheaver.cloud`)"
+      service: "traefik-ingress"
 
   services:
 
@@ -241,34 +168,10 @@ http:
           - url: "http://192.168.1.2"
         passHostHeader: true
 
-    portainer:
+    traefik-ingress:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.3:9000"
-        passHostHeader: true
-    
-    prometheus:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.1.5:9090"
-        passHostHeader: true
-    
-    alert-manager:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.1.6:9093"
-        passHostHeader: true
-    
-    grafana:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.1.7"
-        passHostHeader: true
-
-    woodpecker:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.1.8"
+          - url: "http://192.168.100.150:8080"
         passHostHeader: true
 
   middlewares:
