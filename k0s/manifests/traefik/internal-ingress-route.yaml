@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`traefik.internal.eheaver.cloud`)
+      kind: Rule
+      middlewares:
+      - name: redirect-https
+        namespace: kube-system 
+      services:
+        - name: api@internal
+          kind: TraefikService
+  tls: 
+    secretName: default-ingress-cert
+          

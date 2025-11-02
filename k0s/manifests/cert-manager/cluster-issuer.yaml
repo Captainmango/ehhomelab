@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: internal-cloudflare-cluster-issuer
+  namespace: cert-manager
+spec:
+  acme:
+    email: edward.heaver01@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory # prod (default)
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory # staging
+    privateKeySecretRef:
+      name: internal-cloudflare-cluster-issuer-account-key
+    solvers:
+    - dns01:
+        cloudflare:
+          apiTokenSecretRef:
+            name: cert-manager-sealed-secret
+            key: CF_DNS_API_TOKEN
+      selector:
+        dnsZones:
+          - "eheaver.cloud"
