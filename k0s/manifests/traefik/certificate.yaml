@@ -6,6 +6,8 @@ metadata:
 spec:
   commonName: "eheaver.cloud"
   secretName: default-ingress-cert
+  privateKey:
+    rotationPolicy: "Never"
   issuerRef:
     name: internal-cloudflare-cluster-issuer
     kind: ClusterIssuer
