@@ -141,6 +141,22 @@ http:
               - "*.eheaver.cloud"
       rule: "Host(`traefik.internal.eheaver.cloud`)"
       service: "traefik-ingress"
+  
+    foundry-vtt:
+      entryPoints:
+        - "web"
+        - "websecure"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: 
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
+      rule: "Host(`foundry-vtt.eheaver.cloud`)"
+      service: "foundry-vtt"
 
   services:
 
@@ -173,6 +189,13 @@ http:
         servers:
           - url: "https://192.168.100.150"
         passHostHeader: true
+
+    foundry-vtt:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.100.100:30000"
+        passHostHeader: true
+
 
   middlewares:
     https-redirectscheme:

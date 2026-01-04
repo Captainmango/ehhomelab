@@ -1,0 +1,38 @@
+[Unit]
+Description=Foundry VTT Service
+After=network-online.target
+Wants=network-online.target systemd-networkd-wait-online.service
+
+[Service]
+; Restart if things go bang
+Restart=on-abnormal
+
+; User and group the process will run as.
+User=ubuntu
+Group=ubuntu
+
+; Start FoundryVTT
+ExecStart=/usr/bin/node /opt/foundry/resources/app/main.js --dataPath=/home/ubuntu/foundry-data
+
+; Limit the number of file descriptors, see `man systemd.exec` for more limit settings.
+LimitNOFILE=1048576
+; Don't let it read the whole of home directory
+ProtectHome=true
+
+; … except /foundry-data, because we want to write stuff here.
+;   This merely retains r/w access rights, it does not add anything new. Must still be writable on the host!
+ReadWritePaths=/home/ubuntu/foundry-data
+
+; The following additional security directives only work with systemd v229 or later.
+; Note that you may have to add capabilities required by any plugins in use.
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+; Don't let the service try and gain any new privileges (doesn't let it or its children escalate.)
+NoNewPrivileges=true
+
+; Set the unit to read env vars in... Just in case.
+; EnvironmentFile=-/home/foundry-env
+
+[Install]
+WantedBy=multi-user.target
