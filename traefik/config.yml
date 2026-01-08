@@ -158,6 +158,22 @@ http:
       rule: "Host(`foundry-vtt.eheaver.cloud`)"
       service: "foundry-vtt"
 
+    foundry-vtt-internal:
+      entryPoints:
+        - "web"
+        - "websecure"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: 
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
+      rule: "Host(`foundry-vtt.internal.eheaver.cloud`)"
+      service: "foundry-vtt"
+
   services:
 
     proxmox:
