@@ -93,6 +93,17 @@ data:
       disable_startup_check: false
       disable_failure: false
     authentication_backend:
+      file:
+        path: configuration.yaml
+        password:
+          algorithm: 'argon2'
+          argon2:
+            variant: 'argon2id'
+            iterations: 3
+            memory: 65536
+            parallelism: 4
+            key_length: 32
+            salt_length: 16
       password_reset:
         disable: false
         custom_url: ''
