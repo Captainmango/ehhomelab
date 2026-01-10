@@ -1,9 +1,9 @@
 # Todo List
 
 - [ ] Set up auth for the Ops cluster
-    - [ ] Set up a light values file for helm chart
-    - [ ] Emit helm manifest for Authelia
-    - [ ] Break it down into individual pieces
+    - [x] Set up a light values file for helm chart
+    - [x] Emit helm manifest for Authelia
+    - [x] Break it down into individual pieces
     - [ ] SealedSecrets the bits we need to
     - [ ] Make sure the users configMap is in git-crypt
     - [ ] IngressRoute with public IP

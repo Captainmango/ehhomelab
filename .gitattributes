@@ -1,1 +1,2 @@
 k3s/manifests/authelia/authelia-users-configMap.yml filter=git-crypt diff=git-crypt
+k0s/manifests/authelia/kustomize/base/resources/authelia-users-configmap.yml filter=git-crypt diff=git-crypt
