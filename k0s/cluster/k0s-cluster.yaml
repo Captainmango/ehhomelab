@@ -35,16 +35,7 @@ spec:
         address: 192.168.1.162
         user: ubuntu
         keyPath: "~/.ssh/id_rsa"
-  - role: worker 
-    ssh:
-      address: 192.168.100.23
-      user: ubuntu
-      port: 22
-      keyPath: "~/.ssh/id_rsa"
-      bastion:
-        address: 192.168.1.162
-        user: ubuntu
-        keyPath: "~/.ssh/id_rsa"
+        
   options:
     wait:
       enabled: true
