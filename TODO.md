@@ -8,6 +8,10 @@
     - [ ] Make sure the users configMap is in git-crypt
     - [ ] IngressRoute with public IP
 
+- [ ] Set up BitWarden as a remote secrets manager (SealedSecrets in cluster, BitWarden on VMs)
+    - [ ] Work out how we inject secrets
+    - [ ] API key stuff so we can access vault unattended
+
 - [ ] Set up LiteLLM
     - [ ] Create basic set of manifests for deployment and secret
     - [ ] Add API key(s)
