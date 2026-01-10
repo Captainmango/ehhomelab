@@ -4,8 +4,9 @@
     - [x] Set up a light values file for helm chart
     - [x] Emit helm manifest for Authelia
     - [x] Break it down into individual pieces
-    - [ ] SealedSecrets the bits we need to
-    - [ ] Make sure the users configMap is in git-crypt
+    - [x] SealedSecrets the bits we need to
+    - [x] Make sure the users configMap is in git-crypt
+    - [ ] Make sure kustomize works and apply
     - [ ] IngressRoute with public IP
 
 - [ ] Set up BitWarden as a remote secrets manager (SealedSecrets in cluster, BitWarden on VMs)

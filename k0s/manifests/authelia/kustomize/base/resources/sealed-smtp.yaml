@@ -1,0 +1,16 @@
+﻿---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: smtp-password
+  namespace: authelia
+spec:
+  encryptedData:
+    password.txt: AgApc4NrYjN0IPF+d/RYgKiCa8JXDy3HcX072ve4sKxsJFqxr363Q6JCQ8sFPZGZU60SWftTZT4iJq7ZHaI8ORg9cFf664agiuVtanSAA625MRE1q/KRxTgP4yl0/UcNJULCSSIP5WCgbo0F/GqE8FWTV7fqC3LxFFGR+aW96amvBcn1TH3/AsmmNdtN0uOpe2t6rSgQj9fvRyVlS0HtzK61wNlK99y/iLGza/aKbacAeU5FGgNqqbH1hRIeUijbw/cBCtGj0JsdSvGlw2CYGlXQ3zVrEu0II8zJQj5AyS20HxgqmrrXF9dfoMpbx3qmrOckSNrpNzjb1HLfgArbY1yZkVktd/elbiSrNvRWpnOFTT6Gaz1kIWofpOi5bhHTLNOZ7KnWmt0BaMhNf0gjmHwVzZ2RvLIKDenyymH2W8v63QyAW32X5oIezN95MtMgDlIaEnEAbXrcQiXIXerU+SdzoCl7PzDKkUizMa3FnCGLdkFct82w80U7bZksZnbWVy4Zp3ElPLHA4mhr72ZYh9hxO0ktIn6kkjgsYyW9vsCiJKdJpXNr26w9WfI8+raCLxVx4RdLUPkog7Dw/5+drAexn0IEmlVKXa9Uq0QhH36c1vxbvfRgeRhZJ6lhrU4LVYwsVEX95IBPGCotlbgqgrFJxs2wqmdK5BYPKXDo57LURinoMrt7doqwmILAinksTt+WFRE0WWH1cq2NfyfK0rUU
+  template:
+    metadata:
+      creationTimestamp: null
+      name: smtp-password
+      namespace: authelia
+    type: Opaque
