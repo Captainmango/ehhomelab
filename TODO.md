@@ -1,13 +1,12 @@
 # Todo List
 
-- [ ] Set up auth for the Ops cluster
+- [x] Set up auth for the Ops cluster
     - [x] Set up a light values file for helm chart
     - [x] Emit helm manifest for Authelia
     - [x] Break it down into individual pieces
     - [x] SealedSecrets the bits we need to
     - [x] Make sure the users configMap is in git-crypt
-    - [ ] Make sure kustomize works and apply
-    - [ ] IngressRoute with public IP
+    - [x] Make sure kustomize works and apply
 
 - [ ] Set up BitWarden as a remote secrets manager (SealedSecrets in cluster, BitWarden on VMs)
     - [ ] Work out how we inject secrets
