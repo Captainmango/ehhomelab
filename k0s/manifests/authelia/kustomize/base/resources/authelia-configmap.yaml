@@ -1,4 +1,3 @@
-# Source: authelia/templates/configMap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -128,6 +127,205 @@ data:
     storage:
     notifier:
       disable_startup_check: false
+    identity_providers:
+      oidc:
+        lifespans:
+          access_token: '1 hour'
+          refresh_token: '1 hour and 30 minutes'
+          id_token: '1 hour'
+          authorize_code: '1 minute'
+          device_code: '10 minutes'
+        enforce_pkce: 'public_clients_only'
+        enable_pkce_plain_challenge: false
+        enable_client_debug_messages: false
+        enable_jwt_access_token_stateless_introspection: false
+        minimum_parameter_entropy: 8
+        discovery_signed_response_alg: ''
+        discovery_signed_response_key_id: ''
+        require_pushed_authorization_requests: false
+        jwks:
+          - algorithm: 'RS256'
+            use: 'sig'
+            key_id: 'main-key'
+            key: {{ secret "/secrets/oidc/jwk.RS256.pem" | mindent 10 "|" | msquote }}
+        cors:
+          endpoints:
+          - 'authorization'
+          - 'pushed-authorization-request'
+          - 'token'
+          - 'revocation'
+          - 'introspection'
+          - 'userinfo'
+          allowed_origins_from_client_redirect_uris: false
+        clients:
+          - client_id: 'proxmox'
+            client_name: 'Proxmox'
+            client_secret: '$argon2id$v=19$m=65536,t=3,p=4$XBaQVDneRGBZI9zKN4op0w$9Uz8KHoFIPCuDCRHvydRwwq2uJ2w9QWWKNPbz73iDQM'
+            public: false
+            redirect_uris:
+              - 'https://proxmox.eheaver.cloud'
+            scopes:
+              - 'openid'
+              - 'profile'
+              - 'email'
+            grant_types:
+              - 'authorization_code'
+            response_types:
+              - 'code'
+            authorization_policy: 'one_factor'
+            consent_mode: 'auto'
+            require_pushed_authorization_requests: false
+            require_pkce: true
+            pkce_challenge_method: 'S256'
+            authorization_signed_response_alg: 'RS256'
+            authorization_signed_response_key_id: ''
+            authorization_encrypted_response_key_id: ''
+            authorization_encrypted_response_alg: ''
+            authorization_encrypted_response_enc: ''
+            id_token_signed_response_alg: 'RS256'
+            id_token_signed_response_key_id: ''
+            id_token_encrypted_response_key_id: ''
+            id_token_encrypted_response_alg: ''
+            id_token_encrypted_response_enc: ''
+            access_token_signed_response_alg: 'none'
+            access_token_signed_response_key_id: ''
+            access_token_encrypted_response_key_id: ''
+            access_token_encrypted_response_alg: ''
+            access_token_encrypted_response_enc: ''
+            userinfo_signed_response_alg: 'none'
+            userinfo_signed_response_key_id: ''
+            userinfo_encrypted_response_key_id: ''
+            userinfo_encrypted_response_alg: ''
+            userinfo_encrypted_response_enc: ''
+            introspection_signed_response_alg: 'none'
+            introspection_signed_response_key_id: ''
+            introspection_encrypted_response_key_id: ''
+            introspection_encrypted_response_alg: ''
+            introspection_encrypted_response_enc: ''
+            introspection_endpoint_auth_method: 'client_secret_basic'
+            introspection_endpoint_auth_signing_alg: 'RS256'
+            request_object_signing_alg: ''
+            request_object_encryption_alg: 'none'
+            request_object_encryption_enc: ''
+            token_endpoint_auth_method: 'client_secret_basic'
+            token_endpoint_auth_signing_alg: ''
+            revocation_endpoint_auth_method: 'client_secret_basic'
+            revocation_endpoint_auth_signing_alg: 'RS256'
+            pushed_authorization_request_endpoint_auth_method: 'client_secret_basic'
+            pushed_authorization_request_endpoint_auth_signing_alg: 'RS256'
+          - client_id: 'portainer'
+            client_name: 'Portainer'
+            client_secret: '$argon2id$v=19$m=65536,t=3,p=4$XBaQVDneRGBZI9zKN4op0w$9Uz8KHoFIPCuDCRHvydRwwq2uJ2w9QWWKNPbz73iDQM'
+            public: false
+            redirect_uris:
+              - 'https://portainer.eheaver.cloud'
+            scopes:
+              - 'openid'
+              - 'profile'
+              - 'email'
+              - 'groups'
+            grant_types:
+              - 'authorization_code'
+            response_types:
+              - 'code'
+            authorization_policy: 'one_factor'
+            consent_mode: 'auto'
+            require_pushed_authorization_requests: false
+            require_pkce: false
+            pkce_challenge_method: ''
+            authorization_signed_response_alg: 'RS256'
+            authorization_signed_response_key_id: ''
+            authorization_encrypted_response_key_id: ''
+            authorization_encrypted_response_alg: ''
+            authorization_encrypted_response_enc: ''
+            id_token_signed_response_alg: 'RS256'
+            id_token_signed_response_key_id: ''
+            id_token_encrypted_response_key_id: ''
+            id_token_encrypted_response_alg: ''
+            id_token_encrypted_response_enc: ''
+            access_token_signed_response_alg: 'none'
+            access_token_signed_response_key_id: ''
+            access_token_encrypted_response_key_id: ''
+            access_token_encrypted_response_alg: ''
+            access_token_encrypted_response_enc: ''
+            userinfo_signed_response_alg: 'none'
+            userinfo_signed_response_key_id: ''
+            userinfo_encrypted_response_key_id: ''
+            userinfo_encrypted_response_alg: ''
+            userinfo_encrypted_response_enc: ''
+            introspection_signed_response_alg: 'none'
+            introspection_signed_response_key_id: ''
+            introspection_encrypted_response_key_id: ''
+            introspection_encrypted_response_alg: ''
+            introspection_encrypted_response_enc: ''
+            introspection_endpoint_auth_method: 'client_secret_basic'
+            introspection_endpoint_auth_signing_alg: 'RS256'
+            request_object_signing_alg: ''
+            request_object_encryption_alg: 'none'
+            request_object_encryption_enc: ''
+            token_endpoint_auth_method: 'client_secret_post'
+            token_endpoint_auth_signing_alg: ''
+            revocation_endpoint_auth_method: 'client_secret_basic'
+            revocation_endpoint_auth_signing_alg: 'RS256'
+            pushed_authorization_request_endpoint_auth_method: 'client_secret_basic'
+            pushed_authorization_request_endpoint_auth_signing_alg: 'RS256'
+          - client_id: 'grafana'
+            client_name: 'Grafana'
+            client_secret: '$argon2id$v=19$m=65536,t=3,p=4$XBaQVDneRGBZI9zKN4op0w$9Uz8KHoFIPCuDCRHvydRwwq2uJ2w9QWWKNPbz73iDQM'
+            public: false
+            redirect_uris:
+              - 'https://grafana.eheaver.cloud/login/generic_oauth'
+              - 'https://grafana.eheaver.cloud'
+            scopes:
+              - 'openid'
+              - 'profile'
+              - 'groups'
+              - 'email'
+            grant_types:
+              - 'authorization_code'
+            response_types:
+              - 'code'
+            authorization_policy: 'one_factor'
+            consent_mode: 'auto'
+            require_pushed_authorization_requests: false
+            require_pkce: true
+            pkce_challenge_method: 'S256'
+            authorization_signed_response_alg: 'RS256'
+            authorization_signed_response_key_id: ''
+            authorization_encrypted_response_key_id: ''
+            authorization_encrypted_response_alg: ''
+            authorization_encrypted_response_enc: ''
+            id_token_signed_response_alg: 'RS256'
+            id_token_signed_response_key_id: ''
+            id_token_encrypted_response_key_id: ''
+            id_token_encrypted_response_alg: ''
+            id_token_encrypted_response_enc: ''
+            access_token_signed_response_alg: 'none'
+            access_token_signed_response_key_id: ''
+            access_token_encrypted_response_key_id: ''
+            access_token_encrypted_response_alg: ''
+            access_token_encrypted_response_enc: ''
+            userinfo_signed_response_alg: 'none'
+            userinfo_signed_response_key_id: ''
+            userinfo_encrypted_response_key_id: ''
+            userinfo_encrypted_response_alg: ''
+            userinfo_encrypted_response_enc: ''
+            introspection_signed_response_alg: 'none'
+            introspection_signed_response_key_id: ''
+            introspection_encrypted_response_key_id: ''
+            introspection_encrypted_response_alg: ''
+            introspection_encrypted_response_enc: ''
+            introspection_endpoint_auth_method: 'client_secret_basic'
+            introspection_endpoint_auth_signing_alg: 'RS256'
+            request_object_signing_alg: ''
+            request_object_encryption_alg: 'none'
+            request_object_encryption_enc: ''
+            token_endpoint_auth_method: 'client_secret_basic'
+            token_endpoint_auth_signing_alg: ''
+            revocation_endpoint_auth_method: 'client_secret_basic'
+            revocation_endpoint_auth_signing_alg: 'RS256'
+            pushed_authorization_request_endpoint_auth_method: 'client_secret_basic'
+            pushed_authorization_request_endpoint_auth_signing_alg: 'RS256'
     access_control:
       default_policy: 'two_factor'
     ...
