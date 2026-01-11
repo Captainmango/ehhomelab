@@ -20,13 +20,45 @@ data:
           - admins
           - dev
 
-      edwardheaver:
+      edward_heaver:
         disabled: false
         displayname: "Edward Heaver"
         password: "$argon2id$v=19$m=65536,t=3,p=4$Mvn405S13axgZaQ3vCKctA$kT/5LyZ6qqRkG5O5RCn3gTSh1ojhwvbZTg5Lw6fG4YQ"  # yamllint disable-line rule:line-length
         email: edward.heaver01@gmail.com
         groups:
           - admins
+          - dev
+
+      ryan_dean_hill:
+        disabled: false
+        displayname: "Ryan Dean-Hill"
+        password: "$argon2id$v=19$m=65536,t=3,p=4$Mvn405S13axgZaQ3vCKctA$kT/5LyZ6qqRkG5O5RCn3gTSh1ojhwvbZTg5Lw6fG4YQ"  # yamllint disable-line rule:line-length
+        email: "ryan.deanhill@gmail.com"
+        groups:
+          - dev
+  
+      win_san_pang:
+        disabled: false
+        displayname: "Win San Pang"
+        password: "$argon2id$v=19$m=65536,t=3,p=4$Mvn405S13axgZaQ3vCKctA$kT/5LyZ6qqRkG5O5RCn3gTSh1ojhwvbZTg5Lw6fG4YQ"  # yamllint disable-line rule:line-length
+        email: "romanticchrissy@hotmail.com"
+        groups:
+          - dev
+  
+      lloyd_musto:
+        disabled: false
+        displayname: "Lloyd Musto"
+        password: "$argon2id$v=19$m=65536,t=3,p=4$Mvn405S13axgZaQ3vCKctA$kT/5LyZ6qqRkG5O5RCn3gTSh1ojhwvbZTg5Lw6fG4YQ"  # yamllint disable-line rule:line-length
+        email: "lloydmusto@gmail.com"
+        groups:
+          - dev
+
+      diego_cunado:
+        disabled: false
+        displayname: "Diego_Cunado"
+        password: "$argon2id$v=19$m=65536,t=3,p=4$Mvn405S13axgZaQ3vCKctA$kT/5LyZ6qqRkG5O5RCn3gTSh1ojhwvbZTg5Lw6fG4YQ"  # yamllint disable-line rule:line-length
+        email: "diegocunado@gmail.com"
+        groups:
           - dev
     ...
 
