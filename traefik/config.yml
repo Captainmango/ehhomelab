@@ -147,8 +147,7 @@ http:
         - "web"
         - "websecure"
       middlewares:
-        - default-headers
-        - https-redirectscheme
+        - secured
       tls: 
         certResolver: cloudflare
         domains:
@@ -240,12 +239,6 @@ http:
         - "172.16.0.0/12"
         - "fc00::/7"
 
-    secured:
-      chain:
-        middlewares:
-        - default-whitelist
-        - default-headers
-    
     authelia:
       forwardAuth:
         address: "https://auth.eheaver.cloud/api/authz/forward-auth?authelia_url=https://auth.eheaver.cloud"
@@ -255,6 +248,14 @@ http:
           - "Remote-Groups"
           - "Remote-Name"
           - "Remote-Email"
+    
+    secured:
+      chain:
+        middlewares:
+        - "https-redirectscheme"
+        - "default-whitelist"
+        - "default-headers"
+        - "authelia"
     
     webhook-ratelimit:
       rateLimit:
