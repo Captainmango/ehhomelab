@@ -27,6 +27,23 @@ spec:
         app.kubernetes.io/instance: authelia
         app.kubernetes.io/version: 4.39.13
     spec:
+      securityContext:
+        fsGroup: 1000
+      initContainers:
+        - name: init-users
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              if [ ! -f /config/users/users_database.yml ]; then
+                cp /defaults/users_database.yml /config/users/users_database.yml
+              fi
+          volumeMounts:
+            - name: users-database
+              mountPath: /defaults
+            - name: users
+              mountPath: /config/users
       hostNetwork: false
       hostPID: false
       hostIPC: false
@@ -107,8 +124,8 @@ spec:
           mountPath: /secrets/internal
           readOnly: true
         - mountPath: /config/users
-          name: users-database
-          readOnly: true
+          name: users
+          readOnly: false
         - mountPath: /config/smtp
           name: smtp-password
           readOnly: true
@@ -152,3 +169,14 @@ spec:
           items:
           - key: jwk.RS256.pem
             path: jwk.RS256.pem
+  volumeClaimTemplates:
+    - metadata:
+        name: users
+        namespace: authelia
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: openebs-hostpath
