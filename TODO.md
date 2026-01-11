@@ -13,7 +13,9 @@
     - [ ] API key stuff so we can access vault unattended
 
 - [ ] Set up LiteLLM
-    - [ ] Create basic set of manifests for deployment and secret
+    - [x] Create basic set of manifests for deployment and secret
+    - [ ] Get deployment working (set the image correctly. See the latest Helm subs in I guess)
+    - [ ] Ingress route (no auth and force https. probs needs a cert too?)
     - [ ] Add API key(s)
 
 - [ ] Set up observability stack

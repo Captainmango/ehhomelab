@@ -1,0 +1,17 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: litellm-postgresql
+  namespace: "litellm"
+  labels:
+    app.kubernetes.io/instance: litellm
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/version: 18.1.0
+    app.kubernetes.io/component: primary
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: litellm
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/component: primary
