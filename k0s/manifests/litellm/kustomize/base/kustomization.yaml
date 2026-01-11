@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
 - ./jobs/migrations-job.yaml
 - ./jobs/test-connection-job.yaml
-- ./jobs/test-env-job.yaml
 - ./resources/pg/headless-postgres-service.yaml
 - ./resources/pg/networking-policy.yaml
 - ./resources/pg/postgres-statefulset.yaml

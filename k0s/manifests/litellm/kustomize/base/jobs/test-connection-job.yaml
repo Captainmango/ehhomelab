@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: litellm
     app.kubernetes.io/instance: litellm
-    app.kubernetes.io/version: "v1.80.11-stable"
+    app.kubernetes.io/version: "main-v1.80.11-stable"
 spec:
   containers:
     - name: wget

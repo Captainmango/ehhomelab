@@ -172,13 +172,13 @@ spec:
           emptyDir:
             medium: Memory
   volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
+    - metadata:
         name: data
+        namespace: litellm
       spec:
         accessModes:
           - "ReadWriteOnce"
+        storageClassName: "openebs-hostpath"
         resources:
           requests:
             storage: "8Gi"

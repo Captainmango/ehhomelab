@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: litellm
     app.kubernetes.io/instance: litellm
-    app.kubernetes.io/version: "v1.80.11-stable"
+    app.kubernetes.io/version: "main-v1.80.11-stable"
 spec:
   replicas: 1
   selector:
@@ -19,14 +19,14 @@ spec:
       labels:
         app.kubernetes.io/name: litellm
         app.kubernetes.io/instance: litellm
-        app.kubernetes.io/version: "v1.80.11-stable"
+        app.kubernetes.io/version: "main-v1.80.11-stable"
     spec:
       serviceAccountName: default
       securityContext: {}
       containers:
         - name: litellm
           securityContext: {}
-          image: "ghcr.io/berriai/litellm-database:v1.80.11-stable"
+          image: "ghcr.io/berriai/litellm-database:main-v1.80.11-stable"
           imagePullPolicy: IfNotPresent
           env:
             - name: HOST
