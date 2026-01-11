@@ -10,3 +10,4 @@ resources:
 - ./resources/pdb.yaml
 - ./secrets/sealed-db-access.yaml
 - ./secrets/sealed-db-creds.yaml
+- ./jobs/migrations-job.yaml
