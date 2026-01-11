@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - ./resources/headless-postgres-service.yaml
+- ./resources/postgres-service.yaml
 - ./resources/networking-policy.yaml
 - ./resources/postgres-statefulset.yaml
 - ./resources/service-account.yaml
