@@ -14,7 +14,7 @@
 
 - [ ] Set up LiteLLM
     - [x] Create basic set of manifests for deployment and secret
-    - [ ] Split the postgres and application manifests. 
+    - [x] Split the postgres and application manifests. 
             Postgres has to be first and there's an issue with the volume claim
     - [ ] Ingress route (no auth and force https. probs needs a cert too?)
     - [ ] Add API key(s)
