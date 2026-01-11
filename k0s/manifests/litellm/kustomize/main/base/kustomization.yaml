@@ -5,7 +5,7 @@ resources:
 - ./jobs/test-connection-job.yaml
 - ./resources/main-deployment.yaml
 - ./resources/main-service.yaml
-# - ./resources/settings-configmap.yaml
+- ./resources/settings-configmap.yaml
 - ./secrets/sealed-db-access.yaml
 - ./secrets/sealed-db-creds.yaml
 - ./secrets/sealed-masterkey.yaml
