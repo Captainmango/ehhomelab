@@ -1,0 +1,21 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: litellm-ir
+  namespace: litellm
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`litellm.eheaver.cloud`)
+      kind: Rule
+      middlewares:
+      - name: redirect-https
+        namespace: kube-system 
+      services:
+        - name: litellm
+          kind: Service
+  tls: 
+    secretName: litellm-cert-secret
+          

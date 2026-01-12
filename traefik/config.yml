@@ -139,8 +139,9 @@ http:
           - main: "eheaver.cloud"
             sans:
               - "*.eheaver.cloud"
-      rule: "Host(`traefik.internal.eheaver.cloud`)"
+      rule: "HostRegexp(`^.+\\.eheaver\\.cloud$`)"
       service: "traefik-ingress"
+      priority: 5
   
     foundry-vtt:
       entryPoints:
