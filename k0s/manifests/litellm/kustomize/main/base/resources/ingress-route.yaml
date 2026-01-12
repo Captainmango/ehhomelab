@@ -16,6 +16,9 @@ spec:
       services:
         - name: litellm
           kind: Service
+          namespace: litellm
+          passHostHeader: true
+          port: 4000
   tls: 
     secretName: litellm-cert-secret
           

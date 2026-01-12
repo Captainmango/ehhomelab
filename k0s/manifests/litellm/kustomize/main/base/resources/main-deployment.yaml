@@ -52,10 +52,15 @@ spec:
                 secretKeyRef:
                   name: litellm-masterkey
                   key: masterkey
+            - name: MINIMAX_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minimax-key
+                  key: api_key
           envFrom: []
-          args: []
-            # - --config
-            # - /etc/litellm/config.yaml
+          args:
+            - --config
+            - /etc/litellm/config.yaml
             
           ports:
             - name: http
