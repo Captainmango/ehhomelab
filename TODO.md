@@ -12,12 +12,19 @@
     - [ ] Work out how we inject secrets
     - [ ] API key stuff so we can access vault unattended
 
-- [ ] Set up LiteLLM
+- [x] Set up LiteLLM
     - [x] Create basic set of manifests for deployment and secret
     - [x] Split the postgres and application manifests. 
             Postgres has to be first and there's an issue with the volume claim
-    - [ ] Ingress route (no auth and force https. probs needs a cert too?)
-    - [ ] Add API key(s)
+    - [x] Ingress route (no auth and force https. probs needs a cert too?)
+    - [x] Add API key(s)
+
+- [ ] Set up Open WebUI
+    - [x] Create manifests
+    - [x] Split Redis out so we can apply it first
+    - [ ] Ingress route so we can access (no auth and force https with cert)
+    - [ ] Set up integration with litellm proxy
+    - [ ] Pray
 
 - [ ] Set up observability stack
     - [ ] Set up ClickHouse
