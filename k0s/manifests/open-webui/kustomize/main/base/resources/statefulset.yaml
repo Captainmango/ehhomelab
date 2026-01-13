@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: open-webui
+  namespace: open-webui
+  labels:
+    app.kubernetes.io/version: "0.7.2"
+    app.kubernetes.io/name: open-webui
+    app.kubernetes.io/instance: open-webui
+    app.kubernetes.io/component: open-webui
+    
+spec:
+  replicas: 1
+  serviceName: open-webui
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: open-webui
+      app.kubernetes.io/component: open-webui
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/version: "0.7.2"
+        app.kubernetes.io/name: open-webui
+        app.kubernetes.io/instance: open-webui
+        app.kubernetes.io/component: open-webui
+    spec:
+      initContainers:
+      - name: copy-app-data
+        image: ghcr.io/open-webui/open-webui:0.7.2
+        imagePullPolicy: IfNotPresent
+        command:
+          - sh
+          - -c
+          - cp -R -n /app/backend/data/* /tmp/app-data/
+        volumeMounts:
+        - name: data
+          mountPath: /tmp/app-data
+      enableServiceLinks: false
+      automountServiceAccountToken: false
+      serviceAccountName: existing-sa
+      containers:
+      - name: open-webui
+        image: ghcr.io/open-webui/open-webui:0.7.2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /app/backend/data
+        env:
+        - name: "ENABLE_OLLAMA_API"
+          value: "False"
+        # If only an OpenAI API value is set, set it to OPENAI_API_BASE_URL
+        - name: "OPENAI_API_BASE_URL"
+          value: "https://api.openai.com/v1"
+        - name: "OPENAI_API_KEY"
+          value: "0p3n-w3bu!"
+        - name: "ENABLE_WEBSOCKET_SUPPORT"
+          value: "True"
+        - name: "WEBSOCKET_MANAGER"
+          value: "redis"
+        - name: "REDIS_URL"
+          value: "redis://open-webui-redis:6379/0"
+        - name: "WEBSOCKET_REDIS_URL"
+          value: "redis://open-webui-redis:6379/0"
+        tty: true
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: open-webui
