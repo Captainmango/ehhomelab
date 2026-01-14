@@ -12,6 +12,16 @@
     - [ ] Work out how we inject secrets
     - [ ] API key stuff so we can access vault unattended
 
+- [ ] Set up Doom coding VM
+    - [ ] Provision a VM on `big` (needs decent CPU and RAM)
+        - [ ] Possibly give it an external IP for set up, remove after we're done
+        - [ ] Run the Ansible dev machine set up (good opportunity to sort it out tbf)
+    - [ ] Resize Foundry
+    - [ ] Install the bits we need on it:
+        - [ ] Task
+        - [ ] Docker
+        - [ ] Mise
+
 - [x] Set up LiteLLM
     - [x] Create basic set of manifests for deployment and secret
     - [x] Split the postgres and application manifests. 
@@ -19,12 +29,21 @@
     - [x] Ingress route (no auth and force https. probs needs a cert too?)
     - [x] Add API key(s)
 
-- [ ] Set up Open WebUI
+- [x] Set up Open WebUI
     - [x] Create manifests
     - [x] Split Redis out so we can apply it first
-    - [ ] Ingress route so we can access (no auth and force https with cert)
-    - [ ] Set up integration with litellm proxy
-    - [ ] Pray
+    - [x] Ingress route so we can access (no auth and force https with cert)
+    - [x] Set up integration with litellm proxy
+    - [x] Pray lol (https://github.com/BerriAI/litellm/issues/15950)
+
+- [ ] Redo networking to use VLANs
+    - [ ] Move internal LAN bridge to VLAN (pfsense handles DHCP)
+    - [ ] Move DMZ bridge to VLAN (pfsense handles DHCP)
+    - [ ] Do some more tidying up maybe?
+
+- [ ] Firewall stuff
+    - [ ] Make sure DMZ cannot nat past gateway (probs needs a static route)
+    - [ ] Block all traffic except towards gateway on DMZ
 
 - [ ] Set up observability stack
     - [ ] Set up ClickHouse
