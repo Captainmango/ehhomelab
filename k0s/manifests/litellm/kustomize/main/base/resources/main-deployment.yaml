@@ -47,6 +47,8 @@ spec:
               value: litellm-postgresql
             - name: DATABASE_NAME
               value: litellm
+            - name: STORE_MODEL_IN_DB
+              value: "True"
             - name: PROXY_MASTER_KEY
               valueFrom:
                 secretKeyRef:
