@@ -19,14 +19,14 @@ spec:
       labels:
         app.kubernetes.io/name: litellm
         app.kubernetes.io/instance: litellm
-        app.kubernetes.io/version: "main-v1.80.11-stable"
+        app.kubernetes.io/version: "main-v1.81.3-stable"
     spec:
       serviceAccountName: default
       securityContext: {}
       containers:
         - name: litellm
           securityContext: {}
-          image: "ghcr.io/berriai/litellm-database:main-v1.80.11-stable"
+          image: "ghcr.io/berriai/litellm-database:main-v1.81.3-stable"
           imagePullPolicy: IfNotPresent
           env:
             - name: HOST
@@ -84,11 +84,11 @@ spec:
             periodSeconds: 10
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
               cpu: 500m
               memory: 1Gi
+            limits:
+              cpu: 2
+              memory: 4Gi
 
           volumeMounts:
             - name: litellm-config

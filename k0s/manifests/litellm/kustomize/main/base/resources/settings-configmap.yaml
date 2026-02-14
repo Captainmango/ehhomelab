@@ -14,3 +14,30 @@ data:
           custom_llm_provider: anthropic
           api_key: os.environ/MINIMAX_API_KEY
           api_base: https://api.minimax.io/anthropic
+          input_cost_per_token: 3e-07
+          output_cost_per_token: 12e-07
+      - model_name: MiniMax-M2.5
+        litellm_params:
+          model: anthropic/MiniMax-M2.5
+          custom_llm_provider: anthropic
+          api_key: os.environ/MINIMAX_API_KEY
+          api_base: https://api.minimax.io/anthropic
+          input_cost_per_token: 3e-07
+          output_cost_per_token: 12e-07
+
+      - model_name: MiniMax-M2.1-Highspeed
+        litellm_params:
+          model: anthropic/MiniMax-M2.1-highspeed
+          custom_llm_provider: anthropic
+          api_key: os.environ/MINIMAX_API_KEY
+          api_base: https://api.minimax.io/anthropic
+          input_cost_per_token: 6e-07
+          output_cost_per_token: 24e-07
+      - model_name: MiniMax-M2.5-Highspeed
+        litellm_params:
+          model: anthropic/MiniMax-M2.5-highspeed
+          custom_llm_provider: anthropic
+          api_key: os.environ/MINIMAX_API_KEY
+          api_base: https://api.minimax.io/anthropic
+          input_cost_per_token: 6e-07
+          output_cost_per_token: 24e-07
