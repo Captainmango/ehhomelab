@@ -16,7 +16,7 @@
     - [ ] Provision a VM on `big` (needs decent CPU and RAM)
         - [ ] Possibly give it an external IP for set up, remove after we're done
         - [ ] Run the Ansible dev machine set up (good opportunity to sort it out tbf)
-    - [ ] Resize Foundry
+    - [x] Resize Foundry
     - [ ] Install the bits we need on it:
         - [ ] Task
         - [ ] Docker
@@ -45,14 +45,34 @@
     - [ ] Make sure DMZ cannot nat past gateway (probs needs a static route)
     - [ ] Block all traffic except towards gateway on DMZ
 
-- [ ] Set up observability stack
-    - [ ] Set up ClickHouse
-        - [ ] Client and server?
+- [ ] Set up observability stack (For K8s)
+    - [ ] Set up VictoriaMetrics
+        - [ ] Install the Kubeoperator and make sure it has a public IP + ingress
+        - [ ] Create the VMSingle resource (make sure it's a Daemonset)
     - [ ] Set up Fluentbit DaemonSet (probs just a helm chart?)
         - [ ] Kubernetes logs config
     - [ ] Install Grafana
-        - [ ] Install ClickHouse datasource plugin
-    - [ ] Set up Prometheus
+        - [ ] Set up datasource
+
+- [ ] Set up observability stack for vms
+    - [ ] Set up Fluentbit on VMs
+        - [ ] Create a config that exports from SystemD
+        - [ ] Metrics like CPU and mem usage too?
+    - [ ] Export metrics from VM
+        - [ ] Node exporter?
+        - [ ] VM Agent?
+
+- [ ] Set up homepage
+    - [ ] Set up Kustomize
+    - [ ] Install and configure widgets
+        - [ ] Prometheus
+        - [ ] Grafana
+        - [ ] Traefik? (Ingress and gateway)
+    - [ ] Set up bookmakrs
+        - [ ] LiteLLM
+        - [ ] OpenWebUI
+        - [ ] Foundry (internal route)
+
 
 - [ ] Set up another cluster on `big`
     - [ ] Linkerd so we can talk between clusters?
