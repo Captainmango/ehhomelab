@@ -3,3 +3,4 @@ woodpecker
 .vscode/mcp.json
 terraform/terraform.tfvars
 terraform/.terraform/**
+terraform/terraform.tfstate
