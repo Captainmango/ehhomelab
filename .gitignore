@@ -1,3 +1,5 @@
 sealed-secrets.pem
 woodpecker
 .vscode/mcp.json
+terraform/terraform.tfvars
+terraform/.terraform/**
