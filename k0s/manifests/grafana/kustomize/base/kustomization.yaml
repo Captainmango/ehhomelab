@@ -11,3 +11,5 @@ resources:
 - ./resources/service-grafana.yaml
 - ./secrets/sealed-grafana.yaml
 - ./resources/deployment-grafana.yaml
+- ./resources/certificate.yaml
+- ./resources/ingress-route.yaml

@@ -27,8 +27,10 @@ data:
     provisioning = /etc/grafana/provisioning
 
     [server]
-
-    domain = ''''
+    
+    domain = grafana.eheaver.cloud
+    root_url = https://grafana.eheaver.cloud/
+    serve_from_sub_path = false
 
     [unified_storage]
 

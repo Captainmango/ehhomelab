@@ -1,0 +1,23 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-ir
+  namespace: monitoring
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`grafana.eheaver.cloud`)
+      kind: Rule
+      middlewares:
+      - name: redirect-https
+        namespace: kube-system
+      services:
+        - name: grafana
+          kind: Service
+          namespace: monitoring
+          passHostHeader: true
+          port: 80
+  tls:
+    secretName: grafana-cert-secret
