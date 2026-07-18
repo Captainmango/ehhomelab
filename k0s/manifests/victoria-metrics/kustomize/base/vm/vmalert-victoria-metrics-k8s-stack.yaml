@@ -1,0 +1,33 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAlert
+metadata:
+  name: victoria-metrics-k8s-stack
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/component: vmalert
+    app.kubernetes.io/instance: victoria-metrics
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.147.0
+spec:
+  configMaps: []
+  datasource:
+    url: http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:8428
+  evaluationInterval: 20s
+  externalLabels: {}
+  extraArgs:
+    external.alert.source: explore?left={"datasource":"VictoriaMetrics","queries":[{"expr":{{
+      .Expr|jsonEscape|queryEscape }},"refId":"A"}],"range":{"from":"{{ .ActiveAt.UnixMilli
+      }}","to":"now"}}
+    external.url: http://
+    http.pathPrefix: /
+    remoteWrite.disablePathAppend: 'true'
+  image:
+    tag: v1.147.0
+  notifiers:
+  - url: http://vmalertmanager-victoria-metrics-k8s-stack-0.vmalertmanager-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:9093
+  port: '8080'
+  remoteRead:
+    url: http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:8428
+  remoteWrite:
+    url: http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:8428/api/v1/write
+  selectAllByDefault: true

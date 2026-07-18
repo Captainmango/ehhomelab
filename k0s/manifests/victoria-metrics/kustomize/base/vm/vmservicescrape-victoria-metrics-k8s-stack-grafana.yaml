@@ -1,0 +1,16 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: victoria-metrics-k8s-stack-grafana
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/instance: victoria-metrics
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.147.0
+spec:
+  endpoints:
+  - port: service
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: victoria-metrics
+      app.kubernetes.io/name: grafana
