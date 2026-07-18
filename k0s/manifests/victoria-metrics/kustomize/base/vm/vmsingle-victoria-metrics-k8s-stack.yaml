@@ -15,10 +15,11 @@ spec:
     tag: v1.147.0
   port: '8428'
   replicaCount: 1
-  retentionPeriod: '1'
+  retentionPeriod: '15d'
   storage:
     accessModes:
     - ReadWriteOnce
+    storageClassName: openebs-hostpath
     resources:
       requests:
         storage: 20Gi

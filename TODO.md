@@ -46,13 +46,15 @@
     - [ ] Block all traffic except towards gateway on DMZ
 
 - [ ] Set up observability stack (For K8s)
-    - [ ] Set up VictoriaMetrics
-        - [ ] Install the Kubeoperator and make sure it has a public IP + ingress
-        - [ ] Create the VMSingle resource (make sure it's a Daemonset)
-    - [ ] Set up Fluentbit DaemonSet (probs just a helm chart?)
+    - [x] Set up VictoriaMetrics
+        - [x] Install the Kubeoperator and make sure it has a public IP + ingress
+        - [x] Create the VMSingle resource (make sure it's a Daemonset)
+    - [ ] Set up VictoriaLogs
+        - [ ] Set up Fluentbit DaemonSet (probs just a helm chart?)
+        - [ ] Set up vlagent to pull logs?
         - [ ] Kubernetes logs config
-    - [ ] Install Grafana
-        - [ ] Set up datasource
+    - [x] Install Grafana
+        - [x] Set up datasource
 
 - [ ] Set up observability stack for vms
     - [ ] Set up Fluentbit on VMs
