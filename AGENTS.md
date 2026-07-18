@@ -4,7 +4,8 @@ Personal homelab infrastructure. Two Kubernetes clusters (k3s + k0s), a standalo
 
 ```IMPORTANT
 NEVER APPLY KUSTOMIZE. ALWAYS ASK THE USER TO DO THIS.
-ALWAYS ASK THE USER TO RUNE KUBECTL OR ANY K8S RELATED COMMANDS AND PROVIDE THE OUTPUT.
+ALWAYS ASK THE USER TO RUN KUBECTL OR ANY K8S RELATED COMMANDS AND PROVIDE THE OUTPUT.
+NEVER TRY TO USE TERRAFORM CLI. ALWAYS ASK THE USER TO RUN COMMANDS.
 ```
 
 ## Repo layout
@@ -31,7 +32,6 @@ Check before editing: `file <path>`. Preserve the original encoding/BOM when sav
 - Cluster secrets are **SealedSecrets** (`bitnami.com/v1alpha1`). Sealing key is not in the repo (kept separately as `sealed-secrets.pem`, which is `.gitignore`d).
 - Some source secrets are encrypted with **git-crypt**; see `.gitattributes`.
   - Currently tracked: `k3s/manifests/authelia/authelia-users-configMap.yml`.
-  - Note: the `.gitattributes` path for `k0s/.../migrations-job.yaml` is stale (actual path is under `kustomize/main/base/jobs/`).
 - Terraform needs a `terraform/terraform.tfvars` file (not in repo) with Proxmox API token and SSH keys; see `terraform/variables.tf`.
 
 ## Deploying applications
