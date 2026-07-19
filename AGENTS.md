@@ -29,7 +29,7 @@ Check before editing: `file <path>`. Preserve the original encoding/BOM when sav
 
 ## Secrets
 
-- Cluster secrets are **SealedSecrets** (`bitnami.com/v1alpha1`). Sealing key is not in the repo (kept separately as `sealed-secrets.pem`, which is `.gitignore`d).
+- Cluster secrets are **SealedSecrets** (`bitnami.com/v1alpha1`). You do not need a sealing key. Kubeseal is installed and will retrieve it from the cluster automaitcally.
 - Some source secrets are encrypted with **git-crypt**; see `.gitattributes`.
   - Currently tracked: `k3s/manifests/authelia/authelia-users-configMap.yml`.
 - Terraform needs a `terraform/terraform.tfvars` file (not in repo) with Proxmox API token and SSH keys; see `terraform/variables.tf`.

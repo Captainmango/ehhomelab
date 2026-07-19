@@ -1,0 +1,23 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage-ir
+  namespace: homepage
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`home.eheaver.cloud`)
+      kind: Rule
+      middlewares:
+      - name: redirect-https
+        namespace: kube-system
+      services:
+        - name: homepage
+          kind: Service
+          namespace: homepage
+          passHostHeader: true
+          port: 3000
+  tls:
+    secretName: homepage-cert-secret
