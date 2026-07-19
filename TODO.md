@@ -54,17 +54,12 @@
         - [ ] Node exporter?
         - [ ] VM Agent?
 
-- [ ] Set up homepage
-    - [ ] Set up Kustomize
-    - [ ] Install and configure widgets
-        - [ ] Prometheus
-        - [ ] Grafana
-        - [ ] Traefik? (Ingress and gateway)
-    - [ ] Set up bookmakrs
-        - [ ] LiteLLM
-        - [ ] OpenWebUI
-        - [ ] Foundry (internal route)
-
+- [x] Set up homepage
+    - [x] Set up Kustomize
+    - [x] Install and configure widgets
+        - [x] Prometheus
+        - [x] Grafana
+        - [x] Traefik? (Ingress and gateway)
 
 - [ ] Set up another cluster on `big`
     - [ ] Linkerd so we can talk between clusters?
