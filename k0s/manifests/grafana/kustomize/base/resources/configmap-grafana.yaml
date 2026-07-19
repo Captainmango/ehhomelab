@@ -8,30 +8,23 @@ metadata:
     app.kubernetes.io/instance: victoria-metrics
     app.kubernetes.io/version: 13.1.0
 data:
-  grafana.ini: '[analytics]
-
+  grafana.ini: |
+    [analytics]
     check_for_updates = true
 
     [log]
-
     mode = console
 
     [paths]
-
     data = /var/lib/grafana/
-
     logs = /var/log/grafana
-
     plugins = /var/lib/grafana/plugins
-
     provisioning = /etc/grafana/provisioning
 
     [server]
-    
     domain = grafana.eheaver.cloud
     root_url = https://grafana.eheaver.cloud/
     serve_from_sub_path = false
 
     [unified_storage]
-
-    index_path = /var/lib/grafana-search/bleve'
+    index_path = /var/lib/grafana-search/bleve

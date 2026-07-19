@@ -16,5 +16,7 @@ data:
     \  - access: proxy\n    isDefault: false\n    name: VictoriaMetrics (DS)\n   \
     \ type: victoriametrics-metrics-datasource\n    uid: VictoriaMetricsDS\n    url:\
     \ http://vmsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:8428\n\
+    \  - access: proxy\n    isDefault: false\n    name: VictoriaLogs (DS)\n    type:\
+    \ victoriametrics-logs-datasource\n    uid: VictoriaLogs\n    url: http://vlsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:9428\n\
     \  - access: proxy\n    jsonData:\n      implementation: prometheus\n    name:\
     \ Alertmanager\n    type: alertmanager\n    uid: Alertmanager\n    url: http://vmalertmanager-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:9093"

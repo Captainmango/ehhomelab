@@ -175,6 +175,8 @@ spec:
           value: /etc/grafana/provisioning
         - name: GF_UNIFIED_STORAGE_INDEX_PATH
           value: /var/lib/grafana-search/bleve
+        - name: GF_PLUGINS_PREINSTALL
+          value: victoriametrics-metrics-datasource,victoriametrics-logs-datasource
         livenessProbe:
           failureThreshold: 10
           httpGet:

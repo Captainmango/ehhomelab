@@ -39,6 +39,8 @@ resources:
 - ./vm/vmalert-victoria-metrics-k8s-stack.yaml
 - ./vm/vmalertmanager-victoria-metrics-k8s-stack.yaml
 - ./vm/vmsingle-victoria-metrics-k8s-stack.yaml
+- ./vm/vlsingle-victoria-metrics-k8s-stack.yaml
+- ./vm/vlagent-victoria-metrics-k8s-stack.yaml
 - ./vm/vmnodescrape-victoria-metrics-k8s-stack-cadvisor.yaml
 - ./vm/vmnodescrape-victoria-metrics-k8s-stack-kubelet.yaml
 - ./vm/vmnodescrape-victoria-metrics-k8s-stack-probes.yaml
