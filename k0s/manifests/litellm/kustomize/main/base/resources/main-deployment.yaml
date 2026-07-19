@@ -31,6 +31,10 @@ spec:
           env:
             - name: HOST
               value: "0.0.0.0"
+            - name: LITELLM_LOG
+              value: "INFO"
+            - name: JSON_LOGS
+              value: "True"
             - name: PORT
               value: "4000"
             - name: DATABASE_USERNAME
