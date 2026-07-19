@@ -1,3 +1,4 @@
 k3s/manifests/authelia/authelia-users-configMap.yml filter=git-crypt diff=git-crypt
 k0s/manifests/authelia/kustomize/base/resources/authelia-users-configmap.yml filter=git-crypt diff=git-crypt
 k0s/manifests/litellm/kustomize/main/base/jobs/migrations-job.yaml filter=git-crypt diff=git-crypt
+k0s/manifests/grafana/kustomize/base/resources/configmap-grafana.yaml filter=git-crypt diff=git-crypt

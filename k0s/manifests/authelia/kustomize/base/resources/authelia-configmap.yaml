@@ -187,6 +187,9 @@ data:
           maximum_version: 'TLS1.3'
     identity_providers:
       oidc:
+        claims_policies:
+          grafana:
+            id_token: ['email', 'name', 'groups', 'preferred_username']
         lifespans:
           access_token: '1 hour'
           refresh_token: '1 hour and 30 minutes'
@@ -329,6 +332,7 @@ data:
             pushed_authorization_request_endpoint_auth_signing_alg: 'RS256'
           - client_id: 'grafana'
             client_name: 'Grafana'
+            claims_policy: 'grafana'
             client_secret: '$argon2id$v=19$m=65536,t=3,p=4$XBaQVDneRGBZI9zKN4op0w$9Uz8KHoFIPCuDCRHvydRwwq2uJ2w9QWWKNPbz73iDQM'
             public: false
             redirect_uris:
