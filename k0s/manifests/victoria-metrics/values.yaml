@@ -825,6 +825,7 @@ vlagent:
       tag: v1.52.0
     k8sCollector:
       enabled: true
+      excludeFilter: 'kubernetes.pod_namespace:="kube-system" AND NOT kubernetes.pod_name:~"^traefik-"'
   # -- (object) VLAgent ingress configuration
   ingress:
     enabled: false

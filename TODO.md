@@ -12,16 +12,6 @@
     - [ ] Work out how we inject secrets
     - [ ] API key stuff so we can access vault unattended
 
-- [ ] Set up Doom coding VM
-    - [ ] Provision a VM on `big` (needs decent CPU and RAM)
-        - [ ] Possibly give it an external IP for set up, remove after we're done
-        - [ ] Run the Ansible dev machine set up (good opportunity to sort it out tbf)
-    - [x] Resize Foundry
-    - [ ] Install the bits we need on it:
-        - [ ] Task
-        - [ ] Docker
-        - [ ] Mise
-
 - [x] Set up LiteLLM
     - [x] Create basic set of manifests for deployment and secret
     - [x] Split the postgres and application manifests. 
@@ -45,14 +35,14 @@
     - [ ] Make sure DMZ cannot nat past gateway (probs needs a static route)
     - [ ] Block all traffic except towards gateway on DMZ
 
-- [ ] Set up observability stack (For K8s)
+- [x] Set up observability stack (For K8s)
     - [x] Set up VictoriaMetrics
         - [x] Install the Kubeoperator and make sure it has a public IP + ingress
         - [x] Create the VMSingle resource (make sure it's a Daemonset)
-    - [ ] Set up VictoriaLogs
-        - [ ] Set up Fluentbit DaemonSet (probs just a helm chart?)
-        - [ ] Set up vlagent to pull logs?
-        - [ ] Kubernetes logs config
+    - [x] Set up VictoriaLogs
+        - [x] Set up Fluentbit DaemonSet (probs just a helm chart?)
+        - [x] Set up vlagent to pull logs?
+        - [x] Kubernetes logs config
     - [x] Install Grafana
         - [x] Set up datasource
 
