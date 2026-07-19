@@ -142,6 +142,22 @@ http:
       rule: "HostRegexp(`^.+\\.eheaver\\.cloud$`)"
       service: "traefik-ingress"
       priority: 5
+
+    traefik-dashboard:
+      entryPoints:
+        - "web"
+        - "websecure"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls:
+        certResolver: cloudflare
+        domains:
+          - main: "eheaver.cloud"
+            sans:
+              - "*.eheaver.cloud"
+      rule: "Host(`traefik.eheaver.cloud`)"
+      service: api@internal
   
     foundry-vtt:
       entryPoints:

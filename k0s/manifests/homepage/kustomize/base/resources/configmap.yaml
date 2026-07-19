@@ -31,7 +31,7 @@ data:
             - abbr: GH
               href: https://github.com/Captainmango
   services.yaml: |
-    - Monitoring & Metrics:
+    - Monitoring, Infra & Metrics:
         - Grafana:
             href: https://grafana.eheaver.cloud
             description: Metrics dashboards
@@ -39,6 +39,13 @@ data:
         - Traefik (K8s Ingress):
             href: https://traefik.internal.eheaver.cloud
             description: Ingress controller dashboard
+            icon: traefik.png
+            widget:
+              type: traefik
+              url: https://traefik.internal.eheaver.cloud
+        - Traefik (VM):
+            href: https://traefik.eheaver.cloud
+            description: External reverse proxy dashboard
             icon: traefik.png
 
     - Homelab K8s Nodes:
