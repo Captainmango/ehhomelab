@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
 - ./namespace.yaml
+- ./resources/certificate.yaml
+- ./resources/ingress-route.yaml
 - ./kube-state-metrics/serviceaccount-kube-state-metrics.yaml
 - ./node-exporter/serviceaccount-prometheus-node-exporter.yaml
 - ./operator/serviceaccount-victoria-metrics-operator-cleanup-hook.yaml

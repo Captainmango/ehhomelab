@@ -15,39 +15,18 @@ data:
     theme: dark
     color: slate
     headerStyle: boxedWidgets
+    maxGroupColumns: 2
     layout:
-      Monitoring & Metrics:
-        style: row
-        columns: 2
-      AI:
-        style: row
-        columns: 2
-      Infrastructure:
-        style: row
-        columns: 2
+      Homelab K8s Nodes:
+      Traefik:
+      Monitoring, Infra & Obs:
+      AI Tools:
   bookmarks.yaml: |
     - Homelab:
         - GitHub:
             - abbr: GH
               href: https://github.com/Captainmango
   services.yaml: |
-    - Monitoring, Infra & Metrics:
-        - Grafana:
-            href: https://grafana.eheaver.cloud
-            description: Metrics dashboards
-            icon: grafana.png
-        - Traefik (K8s Ingress):
-            href: https://traefik.internal.eheaver.cloud
-            description: Ingress controller dashboard
-            icon: traefik.png
-            widget:
-              type: traefik
-              url: https://traefik.internal.eheaver.cloud
-        - Traefik (VM):
-            href: https://traefik.eheaver.cloud
-            description: External reverse proxy dashboard
-            icon: traefik.png
-
     - Homelab K8s Nodes:
         - K0s Controller:
             href: https://proxmox.eheaver.cloud/
@@ -67,6 +46,33 @@ data:
             icon: https://cncf-icons.com/artwork/projects/k0s/horizontal/color/k0s-logo-2025-horizontal.svg
             proxmoxNode: pve
             proxmoxVMID: 2002
+
+    - Traefik:
+        - Traefik (K8s Ingress):
+            href: https://traefik.internal.eheaver.cloud
+            description: Ingress controller dashboard
+            icon: traefik.png
+            widget:
+              type: traefik
+              url: https://traefik.internal.eheaver.cloud
+        - Traefik (VM):
+            href: https://traefik.eheaver.cloud
+            description: External reverse proxy dashboard
+            icon: traefik.png
+
+    - Monitoring, Infra & Obs:
+        - Grafana:
+            href: https://grafana.eheaver.cloud
+            description: Metrics dashboards
+            icon: grafana.png
+        - VictoriaMetrics:
+            href: https://victoria-metrics.eheaver.cloud
+            description: Metrics and logs backend
+            icon: victoriametrics.png
+        - PiHole:
+            href: https://pihole.eheaver.cloud
+            description: Network-wide ad blocker
+            icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/pi-hole.png
 
     - AI Tools:
         - Open WebUI:
@@ -100,5 +106,10 @@ data:
         provider: duckduckgo
         target: _blank
   docker.yaml: ""
-  custom.css: ""
+  custom.css: |
+    @media (min-width: 768px) {
+      .services-group {
+        flex-basis: 50% !important;
+      }
+    }
   custom.js: ""

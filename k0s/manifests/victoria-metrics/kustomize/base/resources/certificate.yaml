@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: victoria-metrics-tls
+  namespace: monitoring
+spec:
+  commonName: "eheaver.cloud"
+  secretName: victoria-metrics-cert-secret
+  privateKey:
+    rotationPolicy: "Never"
+  issuerRef:
+    name: internal-cloudflare-cluster-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - "eheaver.cloud"
+    - "*.eheaver.cloud"
+    - "*.internal.eheaver.cloud"

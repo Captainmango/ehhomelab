@@ -48,6 +48,8 @@ spec:
                   fieldPath: status.podIP
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: "$(MY_POD_IP):3000,home.eheaver.cloud"
+            - name: NODE_OPTIONS
+              value: "--dns-result-order=ipv4first"
           ports:
             - name: http
               containerPort: 3000
