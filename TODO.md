@@ -26,6 +26,14 @@
     - [x] Set up integration with litellm proxy
     - [x] Pray lol (https://github.com/BerriAI/litellm/issues/15950)
 
+- [ ] Improve Open WebUI set up
+    - [ ] Add image gen (BlackForest Labs)
+    - [ ] Add video gen (MiniMax and others)
+    - [ ] Set up some better search tools (Tivally sucks tbh)
+    - [ ] Functions and other Extensions (Code Sandbox, custom UI stuff)
+    - [ ] Can we get it to accept images over the wire?
+    - [ ] Might want to add DeepSeek and Mistral models for general purpose use (MiniMax and Kimi are very good at code, but also very expensive for general use.)
+
 - [ ] Redo networking to use VLANs
     - [ ] Move internal LAN bridge to VLAN (pfsense handles DHCP)
     - [ ] Move DMZ bridge to VLAN (pfsense handles DHCP)
@@ -34,6 +42,19 @@
 - [ ] Firewall stuff
     - [ ] Make sure DMZ cannot nat past gateway (probs needs a static route)
     - [ ] Block all traffic except towards gateway on DMZ
+        - [ ] External traffic is fine. Just anything going to other places
+
+- [ ] Set up backups using Restic
+    - [ ] Figure out Restic config for Hetzner bucket
+    - [ ] Backup foundry VM
+        - [ ] SystemD unit
+        - [ ] Cron scheduled to run every week
+    - [ ] Set up backups for k8s cluster private volumes
+        - [ ] Restic + Velero?
+        - [ ] Backup cert chain for sealedsecrets controller
+        - [ ] Backup Grafana stuff
+            - [ ] Needs a PVC
+            - [ ]
 
 - [x] Set up observability stack (For K8s)
     - [x] Set up VictoriaMetrics
@@ -47,6 +68,8 @@
         - [x] Set up datasource
 
 - [ ] Set up observability stack for vms
+    - [ ] Ingress route to vlsingle
+    - [ ] ExternalWorkload resources from VictoriaMetrics?
     - [ ] Set up Fluentbit on VMs
         - [ ] Create a config that exports from SystemD
         - [ ] Metrics like CPU and mem usage too?
@@ -62,4 +85,6 @@
         - [x] Traefik? (Ingress and gateway)
 
 - [ ] Set up another cluster on `big`
+    - [ ] 1 Controller, 1 worker. Add new workers when we need to via k0sctl
+    - [ ] Work out context situation (Manually set the context name locally. If we have multiple, we'll need to sort that out and name them appropriately. Controller should know what the name is really.)
     - [ ] Linkerd so we can talk between clusters?
