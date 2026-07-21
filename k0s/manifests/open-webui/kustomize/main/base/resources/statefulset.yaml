@@ -4,7 +4,7 @@ metadata:
   name: open-webui
   namespace: open-webui
   labels:
-    app.kubernetes.io/version: "0.7.2"
+    app.kubernetes.io/version: "0.10.2"
     app.kubernetes.io/name: open-webui
     app.kubernetes.io/instance: open-webui
     app.kubernetes.io/component: open-webui
@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/version: "0.7.2"
+        app.kubernetes.io/version: "0.10.2"
         app.kubernetes.io/name: open-webui
         app.kubernetes.io/instance: open-webui
         app.kubernetes.io/component: open-webui
@@ -40,7 +40,7 @@ spec:
       serviceAccountName: existing-sa
       containers:
       - name: open-webui
-        image: ghcr.io/open-webui/open-webui:0.7.2
+        image: ghcr.io/open-webui/open-webui:0.10.2
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
