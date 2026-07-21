@@ -6,3 +6,5 @@ resources:
 - ./resources/service-account.yaml
 - ./resources/statefulset.yaml
 - ./resources/svc.yaml
+- ./resources/ingress-route.yaml
+- ./resources/certificate.yaml
