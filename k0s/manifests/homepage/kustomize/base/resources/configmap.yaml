@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  namespace: homepage
+  labels:
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/instance: homepage
+    app.kubernetes.io/version: "v1.13.2"
+data:
+  kubernetes.yaml: |
+    mode: cluster
+  settings.yaml: |
+    title: Homelab
+    theme: dark
+    color: slate
+    headerStyle: boxedWidgets
+    maxGroupColumns: 2
+    background:
+      image: https://images.pexels.com/photos/10229606/pexels-photo-10229606.jpeg
+      opacity: 35
+      brightness: 40
+    layout:
+      Homelab K8s Nodes:
+      Traefik:
+      Monitoring, Infra & Obs:
+      AI Tools:
+  bookmarks.yaml: ""
+  services.yaml: |
+    - Homelab K8s Nodes:
+        - K0s Controller:
+            href: https://proxmox.eheaver.cloud/
+            description: k0s controller node
+            icon: https://cncf-icons.com/artwork/projects/k0s/icon/white/k0s-logo-2025-white-icon.svg
+            proxmoxNode: pve
+            proxmoxVMID: 1001
+        - K0s Worker 1:
+            href: https://proxmox.eheaver.cloud/
+            description: k0s worker node 1
+            icon: https://cncf-icons.com/artwork/projects/k0s/icon/white/k0s-logo-2025-white-icon.svg
+            proxmoxNode: pve
+            proxmoxVMID: 2001
+        - K0s Worker 2:
+            href: https://proxmox.eheaver.cloud/
+            description: k0s worker node 2
+            icon: https://cncf-icons.com/artwork/projects/k0s/icon/white/k0s-logo-2025-white-icon.svg
+            proxmoxNode: pve
+            proxmoxVMID: 2002
+
+    - Traefik:
+        - Traefik (K8s Ingress):
+            href: https://traefik.internal.eheaver.cloud
+            description: Ingress controller dashboard
+            icon: traefik.png
+            widget:
+              type: traefik
+              url: https://traefik.internal.eheaver.cloud
+        - Traefik (VM):
+            href: https://traefik.eheaver.cloud
+            description: External reverse proxy dashboard
+            icon: traefik.png
+
+    - Monitoring, Infra & Obs:
+        - Grafana:
+            href: https://grafana.eheaver.cloud
+            description: Metrics dashboards
+            icon: grafana.png
+        - VictoriaMetrics:
+            href: https://victoria-metrics.eheaver.cloud
+            description: Metrics and logs backend
+            icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/victoriametrics-light.png
+        - PiHole:
+            href: https://pihole.eheaver.cloud
+            description: Network-wide ad blocker
+            icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/pi-hole.png
+
+    - AI Tools:
+        - Open WebUI:
+            href: https://chat.eheaver.cloud
+            description: Chat interface
+            icon: open-webui.png
+        - LiteLLM:
+            href: https://litellm.eheaver.cloud
+            description: LLM proxy
+            icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/litlellm.png
+  widgets.yaml: |
+    - openmeteo:
+        label: London
+        latitude: 51.5074
+        longitude: -0.1278
+        timezone: Europe/London
+        units: metric
+        cache: 5
+  docker.yaml: ""
+  custom.css: |
+    .service-card,
+    .bookmark-group,
+    .information-widget {
+      background-color: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      border-radius: 0.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .services-group {
+        flex-basis: 50% !important;
+      }
+    }
+  custom.js: ""

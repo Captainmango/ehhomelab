@@ -12,16 +12,6 @@
     - [ ] Work out how we inject secrets
     - [ ] API key stuff so we can access vault unattended
 
-- [ ] Set up Doom coding VM
-    - [ ] Provision a VM on `big` (needs decent CPU and RAM)
-        - [ ] Possibly give it an external IP for set up, remove after we're done
-        - [ ] Run the Ansible dev machine set up (good opportunity to sort it out tbf)
-    - [x] Resize Foundry
-    - [ ] Install the bits we need on it:
-        - [ ] Task
-        - [ ] Docker
-        - [ ] Mise
-
 - [x] Set up LiteLLM
     - [x] Create basic set of manifests for deployment and secret
     - [x] Split the postgres and application manifests. 
@@ -36,6 +26,14 @@
     - [x] Set up integration with litellm proxy
     - [x] Pray lol (https://github.com/BerriAI/litellm/issues/15950)
 
+- [ ] Improve Open WebUI set up
+    - [ ] Add image gen (BlackForest Labs)
+    - [ ] Add video gen (MiniMax and others)
+    - [ ] Set up some better search tools (Tivally sucks tbh)
+    - [ ] Functions and other Extensions (Code Sandbox, custom UI stuff)
+    - [ ] Can we get it to accept images over the wire?
+    - [ ] Might want to add DeepSeek and Mistral models for general purpose use (MiniMax and Kimi are very good at code, but also very expensive for general use.)
+
 - [ ] Redo networking to use VLANs
     - [ ] Move internal LAN bridge to VLAN (pfsense handles DHCP)
     - [ ] Move DMZ bridge to VLAN (pfsense handles DHCP)
@@ -44,17 +42,34 @@
 - [ ] Firewall stuff
     - [ ] Make sure DMZ cannot nat past gateway (probs needs a static route)
     - [ ] Block all traffic except towards gateway on DMZ
+        - [ ] External traffic is fine. Just anything going to other places
 
-- [ ] Set up observability stack (For K8s)
-    - [ ] Set up VictoriaMetrics
-        - [ ] Install the Kubeoperator and make sure it has a public IP + ingress
-        - [ ] Create the VMSingle resource (make sure it's a Daemonset)
-    - [ ] Set up Fluentbit DaemonSet (probs just a helm chart?)
-        - [ ] Kubernetes logs config
-    - [ ] Install Grafana
-        - [ ] Set up datasource
+- [ ] Set up backups using Restic
+    - [ ] Figure out Restic config for Hetzner bucket
+    - [ ] Backup foundry VM
+        - [ ] SystemD unit
+        - [ ] Cron scheduled to run every week
+    - [ ] Set up backups for k8s cluster private volumes
+        - [ ] Restic + Velero?
+        - [ ] Backup cert chain for sealedsecrets controller
+        - [ ] Backup Grafana stuff
+            - [ ] Needs a PVC
+            - [ ]
+
+- [x] Set up observability stack (For K8s)
+    - [x] Set up VictoriaMetrics
+        - [x] Install the Kubeoperator and make sure it has a public IP + ingress
+        - [x] Create the VMSingle resource (make sure it's a Daemonset)
+    - [x] Set up VictoriaLogs
+        - [x] Set up Fluentbit DaemonSet (probs just a helm chart?)
+        - [x] Set up vlagent to pull logs?
+        - [x] Kubernetes logs config
+    - [x] Install Grafana
+        - [x] Set up datasource
 
 - [ ] Set up observability stack for vms
+    - [ ] Ingress route to vlsingle
+    - [ ] ExternalWorkload resources from VictoriaMetrics?
     - [ ] Set up Fluentbit on VMs
         - [ ] Create a config that exports from SystemD
         - [ ] Metrics like CPU and mem usage too?
@@ -62,17 +77,14 @@
         - [ ] Node exporter?
         - [ ] VM Agent?
 
-- [ ] Set up homepage
-    - [ ] Set up Kustomize
-    - [ ] Install and configure widgets
-        - [ ] Prometheus
-        - [ ] Grafana
-        - [ ] Traefik? (Ingress and gateway)
-    - [ ] Set up bookmakrs
-        - [ ] LiteLLM
-        - [ ] OpenWebUI
-        - [ ] Foundry (internal route)
-
+- [x] Set up homepage
+    - [x] Set up Kustomize
+    - [x] Install and configure widgets
+        - [x] Prometheus
+        - [x] Grafana
+        - [x] Traefik? (Ingress and gateway)
 
 - [ ] Set up another cluster on `big`
+    - [ ] 1 Controller, 1 worker. Add new workers when we need to via k0sctl
+    - [ ] Work out context situation (Manually set the context name locally. If we have multiple, we'll need to sort that out and name them appropriately. Controller should know what the name is really.)
     - [ ] Linkerd so we can talk between clusters?

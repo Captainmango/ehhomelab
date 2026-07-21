@@ -1,0 +1,28 @@
+apiVersion: operator.victoriametrics.com/v1
+kind: VLAgent
+metadata:
+  name: victoria-metrics-k8s-stack
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/component: vlagent
+    app.kubernetes.io/instance: victoria-metrics
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.52.0
+spec:
+  image:
+    tag: v1.52.0
+  port: '9429'
+  k8sCollector:
+    enabled: true
+    excludeFilter: 'kubernetes.pod_namespace:="kube-system" AND NOT kubernetes.pod_name:~"^traefik-"'
+  remoteWrite:
+  - url: http://vlsingle-victoria-metrics-k8s-stack.monitoring.svc.cluster.local.:9428/insert/native
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        storageClassName: openebs-hostpath
+        resources:
+          requests:
+            storage: 10Gi

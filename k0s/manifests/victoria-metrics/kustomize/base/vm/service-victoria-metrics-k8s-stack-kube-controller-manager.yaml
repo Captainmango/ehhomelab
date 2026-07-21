@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: victoria-metrics-k8s-stack-kube-controller-manager
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/component: kube-controller-manager
+    app.kubernetes.io/instance: victoria-metrics
+    app.kubernetes.io/name: victoria-metrics-k8s-stack
+    app.kubernetes.io/version: v1.147.0
+spec:
+  clusterIP: None
+  ports:
+  - name: http-metrics
+    port: 10257
+    protocol: TCP
+    targetPort: 10257
+  selector:
+    component: kube-controller-manager
+  type: ClusterIP

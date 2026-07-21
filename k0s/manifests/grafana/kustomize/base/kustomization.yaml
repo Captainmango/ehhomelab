@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ./resources/serviceaccount-grafana.yaml
+- ./resources/configmap-grafana.yaml
+- ./resources/configmap-grafana-config-dashboards.yaml
+- ./resources/configmap-grafana-datasource.yaml
+- ./resources/clusterrole-grafana-clusterrole.yaml
+- ./resources/clusterrolebinding-grafana-clusterrolebinding.yaml
+- ./resources/service-grafana.yaml
+- ./secrets/sealed-grafana.yaml
+- ./resources/deployment-grafana.yaml
+- ./resources/certificate.yaml
+- ./resources/ingress-route.yaml

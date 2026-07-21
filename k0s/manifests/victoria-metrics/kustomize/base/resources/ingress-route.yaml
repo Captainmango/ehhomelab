@@ -1,0 +1,23 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: victoria-metrics-ir
+  namespace: monitoring
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`victoria-metrics.eheaver.cloud`)
+      kind: Rule
+      middlewares:
+      - name: redirect-https
+        namespace: kube-system
+      services:
+        - name: vmsingle-victoria-metrics-k8s-stack
+          kind: Service
+          namespace: monitoring
+          passHostHeader: true
+          port: 8428
+  tls:
+    secretName: victoria-metrics-cert-secret

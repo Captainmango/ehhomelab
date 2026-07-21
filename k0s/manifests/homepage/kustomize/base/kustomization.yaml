@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ./resources/namespace.yaml
+  - ./resources/serviceaccount.yaml
+  - ./resources/serviceaccount-token.yaml
+  - ./resources/clusterrole.yaml
+  - ./resources/clusterrolebinding.yaml
+  - ./resources/configmap.yaml
+  - ./resources/deployment.yaml
+  - ./resources/service.yaml
+  - ./resources/certificate.yaml
+  - ./resources/ingress-route.yaml
+  - ./secrets/proxmox-sealedsecret.yaml
