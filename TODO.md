@@ -34,15 +34,15 @@
     - [ ] Can we get it to accept images over the wire?
     - [ ] Might want to add DeepSeek and Mistral models for general purpose use (MiniMax and Kimi are very good at code, but also very expensive for general use.)
 
-- [ ] Redo networking to use VLANs
-    - [ ] Move internal LAN bridge to VLAN (pfsense handles DHCP)
-    - [ ] Move DMZ bridge to VLAN (pfsense handles DHCP)
-    - [ ] Do some more tidying up maybe?
+- [x] Redo networking to use VLANs
+    - [x] Move internal LAN bridge to VLAN (pfsense handles DHCP)
+    - [x] Move DMZ bridge to VLAN (pfsense handles DHCP)
+    - [x] Do some more tidying up maybe?
 
-- [ ] Firewall stuff
-    - [ ] Make sure DMZ cannot nat past gateway (probs needs a static route)
-    - [ ] Block all traffic except towards gateway on DMZ
-        - [ ] External traffic is fine. Just anything going to other places
+- [x] Firewall stuff
+    - [x] Make sure DMZ cannot nat past gateway (probs needs a static route)
+    - [x] Block all traffic except towards gateway on DMZ
+        - [x] External traffic is fine. Just anything going to other places
 
 - [ ] Set up backups using Restic
     - [ ] Figure out Restic config for Hetzner bucket

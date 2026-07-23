@@ -207,7 +207,7 @@ http:
     pfsense:
       loadBalancer:
         servers:
-          - url: "http://192.168.2.237" # LAN interface
+          - url: "http://192.168.201.254" # LAN interface
         passHostHeader: true
     
     authelia:
@@ -225,7 +225,7 @@ http:
     foundry-vtt:
       loadBalancer:
         servers:
-          - url: "http://192.168.100.100:30000"
+          - url: "http://192.168.201.100:30000"
         passHostHeader: true
 
 
