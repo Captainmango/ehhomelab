@@ -4,37 +4,39 @@ metadata:
   name: k0s-cluster
   user: admin
 spec:
+  k0s:
+    version: v1.36.5+k0s.0
   hosts:
   - role: controller
     ssh:
       address: 192.168.100.11
       user: ubuntu
       port: 22
-      keyPath: "~/.ssh/id_rsa"
+      keyPath: "~/.ssh/homelab"
       bastion:
         address: 192.168.1.162
         user: ubuntu
-        keyPath: "~/.ssh/id_rsa"
+        keyPath: "~/.ssh/homelab"
   - role: worker 
     ssh:
       address: 192.168.100.21
       user: ubuntu
       port: 22
-      keyPath: "~/.ssh/id_rsa"
+      keyPath: "~/.ssh/homelab"
       bastion:
         address: 192.168.1.162
         user: ubuntu
-        keyPath: "~/.ssh/id_rsa"
+        keyPath: "~/.ssh/homelab"
   - role: worker 
     ssh:
       address: 192.168.100.22
       user: ubuntu
       port: 22
-      keyPath: "~/.ssh/id_rsa"
+      keyPath: "~/.ssh/homelab"
       bastion:
         address: 192.168.1.162
         user: ubuntu
-        keyPath: "~/.ssh/id_rsa"
+        keyPath: "~/.ssh/homelab"
         
   options:
     wait:
